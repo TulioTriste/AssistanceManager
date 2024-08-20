@@ -1,7 +1,0 @@
-{
-  "name": "AssistanceManager",
-  "integrations": {
-    "capacitor": {}
-  },
-  "type": "angular"
-}
