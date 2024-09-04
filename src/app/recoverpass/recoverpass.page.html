@@ -1,0 +1,35 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Recuperación de Contraseña</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large" class="centrado">Recupera tu contraseña</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="content-container">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title class="card-title">Ingrese su correo</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item>
+          <ion-input
+            label="Correo"
+            type="text"
+            labelPlacement="floating"
+            placeholder="Ingrese su correo"
+          ></ion-input>
+        </ion-item>
+      </ion-card-content>
+      <!-- Contenedor adicional para el botón -->
+      <div class="button-container">
+        <ion-button expand="full" color="primary" (click)="presentToast()" [routerLink]="['/folder/inbox']">Recuperar</ion-button>
+      </div>
+    </ion-card>
+  </div>
+</ion-content>

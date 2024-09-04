@@ -10,10 +10,19 @@ const routes: Routes = [
   {
     path: 'folder/:id',
     loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule)
-  },  {
+  },
+  {
     path: 'home',
     loadChildren: () => import('./base/home/home.module').then( m => m.HomePageModule)
+  },
+  {
+    path: 'recoverpass',
+    loadChildren: () => import('./recoverpass/recoverpass.module').then( m => m.RecoverpassPageModule)
+  },  {
+    path: 'register',
+    loadChildren: () => import('./register/register.module').then( m => m.RegisterPageModule)
   }
+
 
 ];
 

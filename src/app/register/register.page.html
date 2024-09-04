@@ -1,0 +1,59 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Register</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Register</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Register</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-list>
+        <!-- Nombre -->
+        <ion-item>
+          <ion-label position="floating">Nombre</ion-label>
+          <ion-input [(ngModel)]="user.name" placeholder="Ingrese su nombre"></ion-input>
+        </ion-item>
+
+        <!-- Apellidos -->
+        <ion-item>
+          <ion-label position="floating">Apellidos</ion-label>
+          <ion-input [(ngModel)]="user.surname" placeholder="Ingrese sus apellidos"></ion-input>
+        </ion-item>
+
+        <!-- Edad -->
+        <ion-item>
+          <ion-label position="floating">Edad</ion-label>
+          <ion-input [(ngModel)]="user.age" type="number" placeholder="Ingrese su edad"></ion-input>
+        </ion-item>
+
+        <!-- Nivel -->
+        <ion-item>
+          <ion-label>Nivel</ion-label>
+          <ion-select [(ngModel)]="user.level" placeholder="Seleccione su nivel">
+            <ion-select-option value="ninguno">Ninguno</ion-select-option>
+            <ion-select-option value="tecnico">Técnico</ion-select-option>
+            <ion-select-option value="universitario">Universitario</ion-select-option>
+            <ion-select-option value="magister">Magíster</ion-select-option>
+            <ion-select-option value="cancelar">Cancelar</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+    
+        <!-- Botón de registro -->
+        <ion-item>
+          <ion-button expand="full" color="primary" (click)="register()">Registrarse</ion-button>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

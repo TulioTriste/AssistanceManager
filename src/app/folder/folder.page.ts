@@ -25,9 +25,14 @@ export class FolderPage implements OnInit {
   mensaje = '';
   spinner = false;
 
+  // Añadido para la visibilidad de la contraseña
+  passwordType: string = 'password';
+  eyeIcon: string = 'eye-off'; // Por defecto el ojo está cerrado
+
   ngAfterContentInit() {
     this.animarLogin();
   }
+  
   animarLogin() {
     /* seleccionamos el item desde el Front con un query selector y reconocemos el elemento como HTMLElement para que sea compatible con la animacion */
     const loginIcon = document.querySelector(".login img") as HTMLElement;
@@ -50,6 +55,7 @@ export class FolderPage implements OnInit {
   cambiarSpinner() {
     this.spinner = !this.spinner;
   }
+
   validar() {
     if (this.user.username.length != 0) {
       if (this.user.password.length != 0) {
@@ -78,6 +84,17 @@ export class FolderPage implements OnInit {
       console.log('Usuario vacio');
       this.mensaje = 'Usuario Vacio';
       //Tampoco funciona
+    }
+  }
+
+  // Añadido para manejar la visibilidad de la contraseña
+  togglePasswordVisibility() {
+    if (this.passwordType === 'password') {
+      this.passwordType = 'text';
+      this.eyeIcon = 'eye'; // Ojo abierto
+    } else {
+      this.passwordType = 'password';
+      this.eyeIcon = 'eye-off'; // Ojo cerrado
     }
   }
 }

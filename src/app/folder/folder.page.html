@@ -27,8 +27,9 @@
       </ion-item>
 
       <ion-item>
-        <ion-input label="Contraseña" [(ngModel)]="user.password" type="password" labelPlacement="floating"
-          placeholder="Ingrese su contraseña">
+        <ion-input [(ngModel)]="user.password" [type]="passwordType" label="Contraseña" 
+          labelPlacement="floating" placeholder="Ingrese su contraseña">
+          <ion-icon [name]="eyeIcon" slot="end" (click)="togglePasswordVisibility()"></ion-icon>
         </ion-input>
       </ion-item>
 
@@ -38,7 +39,7 @@
 
       <div *ngIf="spinner">
         <ion-item id="carga">
-          <ion-label>Cargando</ion-label>
+          <ion-label>Cargando...</ion-label>
         </ion-item>
         <ion-item id="carga">
           <mat-spinner></mat-spinner>
@@ -51,6 +52,10 @@
 
       <ion-item>
         <ion-button fill="clear" [routerLink]="['/register']">Registrar</ion-button>
+      </ion-item>
+
+      <ion-item>
+        <ion-button fill="clear" [routerLink]="['/recoverpass']">¿Olvidaste tu contraseña?</ion-button>
       </ion-item>
     </ion-list>
   </ion-card>
