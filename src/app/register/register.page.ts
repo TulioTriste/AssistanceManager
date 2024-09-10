@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AlertController } from '@ionic/angular'; // Importar AlertController
+import { ToastController } from '@ionic/angular'; // Importar ToastController
 
 @Component({
   selector: 'app-register',
@@ -13,10 +13,10 @@ export class RegisterPage implements OnInit {
     surname: '',
     age: '',
     level: '',
-    birthdate: '', // Asegúrate de agregar este campo si es necesario
+    password: ''
   };
 
-  constructor(private router: Router, private alertController: AlertController) {}
+  constructor(private router: Router, private toastController: ToastController) {}
 
   ngOnInit() {}
 
@@ -30,33 +30,42 @@ export class RegisterPage implements OnInit {
       this.showAlert('Edad');
     } else if (!this.user.level) {
       this.showAlert('Nivel');
+    } else if (!this.user.password) {
+      this.showAlert('Contraseña');
+    } else if (!this.isPasswordStrong(this.user.password)) {
+      this.showAlert('Contraseña no válida. Debe tener al menos 8 caracteres, incluir una mayúscula, una minúscula, un número y un carácter especial.');
     } else {
-      // Mostrar alerta de éxito y redirigir al login
-      await this.showSuccessAlert();
+      // Mostrar mensaje de éxito y redirigir al login
+      await this.presentToast();
       this.router.navigate(['/folder/inbox']);
     }
   }
 
-  // Función para mostrar una alerta en rojo cuando un campo está vacío
-  async showAlert(field: string) {
-    const alert = await this.alertController.create({
-      header: 'Campo Vacío',
-      message: `El siguiente campo está vacío: ${field}`,
-      buttons: ['OK']
+  // Función para mostrar una alerta en rojo cuando un campo está vacío o incorrecto
+  async showAlert(message: string) {
+    const toast = await this.toastController.create({
+      message: `Error en el campo: ${message}`,
+      duration: 3000,
+      position: 'top',
+      color: 'danger',
     });
-
-    await alert.present();
+    toast.present();
   }
 
-  // Función para mostrar una alerta en verde cuando el registro es exitoso
-  async showSuccessAlert() {
-    const alert = await this.alertController.create({
-      header: 'Registro Exitoso',
-      message: 'Has sido registrado correctamente.',
-      cssClass: 'success-alert', // Clase CSS personalizada
-      buttons: ['OK']
+  // Función para mostrar un mensaje de éxito en verde
+  async presentToast() {
+    const toast = await this.toastController.create({
+      message: 'Registro exitoso. Ahora puedes iniciar sesión.',
+      duration: 3000,
+      position: 'top',
+      color: 'success',
     });
+    toast.present();
+  }
 
-    await alert.present();
+  // Función para validar si la contraseña es robusta
+  isPasswordStrong(password: string): boolean {
+    const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-])[A-Za-z\d!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]{8,}$/;
+    return passwordRegex.test(password);
   }
 }

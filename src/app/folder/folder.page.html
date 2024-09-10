@@ -1,8 +1,6 @@
 <ion-header [translucent]="true">
+  <!-- Flecha para regresar a la página anterior -->
   <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
     <ion-title>{{ folder }}</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -27,8 +25,8 @@
       </ion-item>
 
       <ion-item>
-        <ion-input [(ngModel)]="user.password" [type]="passwordType" label="Contraseña" 
-          labelPlacement="floating" placeholder="Ingrese su contraseña">
+        <ion-input [(ngModel)]="user.password" [type]="passwordType" label="Contraseña" labelPlacement="floating"
+          placeholder="Ingrese su contraseña">
           <ion-icon [name]="eyeIcon" slot="end" (click)="togglePasswordVisibility()"></ion-icon>
         </ion-input>
       </ion-item>

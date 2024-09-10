@@ -26,3 +26,26 @@ ion-menu-button {
 #container a {
   text-decoration: none;
 }
+.bienvenida {
+  text-align: center;
+  margin-top: 10px;
+}
+
+#bienvenidaAnimada h1 {
+  animation: fadeIn 4s infinite;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+}

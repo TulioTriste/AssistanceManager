@@ -1,5 +1,8 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button> <!-- Botón de retroceso -->
+    </ion-buttons>
     <ion-title>Register</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -21,19 +24,19 @@
         <!-- Nombre -->
         <ion-item>
           <ion-label position="floating">Nombre</ion-label>
-          <ion-input [(ngModel)]="user.name" placeholder="Ingrese su nombre"></ion-input>
+          <ion-input [(ngModel)]="user.name" ></ion-input>
         </ion-item>
 
         <!-- Apellidos -->
         <ion-item>
           <ion-label position="floating">Apellidos</ion-label>
-          <ion-input [(ngModel)]="user.surname" placeholder="Ingrese sus apellidos"></ion-input>
+          <ion-input [(ngModel)]="user.surname" ></ion-input>
         </ion-item>
 
         <!-- Edad -->
         <ion-item>
           <ion-label position="floating">Edad</ion-label>
-          <ion-input [(ngModel)]="user.age" type="number" placeholder="Ingrese su edad"></ion-input>
+          <ion-input [(ngModel)]="user.age" type="number" ></ion-input>
         </ion-item>
 
         <!-- Nivel -->
@@ -48,7 +51,12 @@
           </ion-select>
         </ion-item>
 
-    
+        <!-- Contraseña -->
+        <ion-item>
+          <ion-label position="floating">Contraseña</ion-label>
+          <ion-input [(ngModel)]="user.password" type="password" ></ion-input>
+        </ion-item>
+
         <!-- Botón de registro -->
         <ion-item>
           <ion-button expand="full" color="primary" (click)="register()">Registrarse</ion-button>
