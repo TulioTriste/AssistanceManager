@@ -1,14 +1,23 @@
 <ion-header [translucent]="true">
-  <!-- Flecha para regresar a la página anterior -->
-  <ion-toolbar>
-    <ion-title>{{ folder }}</ion-title>
-  </ion-toolbar>
-</ion-header>
+  <!-- Font Awesome CDN -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <ion-toolbar>
+      <!-- Flecha para regresar a la página anterior -->
+      <ion-buttons slot="start">
+        <ion-back-button appShowBackButton defaultHref="/"></ion-back-button>
+      </ion-buttons>
+      <ion-title>{{ folder | titlecase }}</ion-title>
+    </ion-toolbar>
+  </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-card>
     <ion-card-header>
-      <ion-card-title>Please Login</ion-card-title>
+      <!-- Contenedor para el ícono centrado -->
+      <div id="icon-container">
+        <i class="fas fa-key" id="login-icon"></i>
+      </div>
     </ion-card-header>
 
     <ion-list>
@@ -18,12 +27,13 @@
         </ion-card-content>
       </ion-item>
 
+      <!-- Campo de usuario -->
       <ion-item>
-        <ion-input [(ngModel)]="user.username" label="Usuario" labelPlacement="floating"
-          placeholder="Ingrese su usuario">
+        <ion-input [(ngModel)]="user.username" label="Usuario" labelPlacement="floating" placeholder="Ingrese su usuario">
         </ion-input>
       </ion-item>
 
+      <!-- Campo de contraseña con icono para mostrar u ocultar -->
       <ion-item>
         <ion-input [(ngModel)]="user.password" [type]="passwordType" label="Contraseña" labelPlacement="floating"
           placeholder="Ingrese su contraseña">
@@ -31,27 +41,32 @@
         </ion-input>
       </ion-item>
 
+      <!-- Mensaje de validación -->
       <ion-item>
-        <ion-label>{{mensaje}}</ion-label>
+        <ion-label>{{ mensaje }}</ion-label>
       </ion-item>
 
+      <!-- Spinner de carga durante el proceso de validación -->
       <div *ngIf="spinner">
         <ion-item id="carga">
           <ion-label>Cargando...</ion-label>
         </ion-item>
         <ion-item id="carga">
-          <mat-spinner></mat-spinner>
+          <ion-spinner name="crescent"></ion-spinner> <!-- Ionic spinner -->
         </ion-item>
       </div>
 
+      <!-- Botón de ingreso -->
       <ion-item>
-        <ion-button fill="clear" (click)="validar()">Ingresar</ion-button>
+        <ion-button expand="block" (click)="validar()">Ingresar</ion-button>
       </ion-item>
 
+      <!-- Botón para registrarse -->
       <ion-item>
         <ion-button fill="clear" [routerLink]="['/register']">Registrar</ion-button>
       </ion-item>
 
+      <!-- Enlace para recuperar contraseña -->
       <ion-item>
         <ion-button fill="clear" [routerLink]="['/recoverpass']">¿Olvidaste tu contraseña?</ion-button>
       </ion-item>

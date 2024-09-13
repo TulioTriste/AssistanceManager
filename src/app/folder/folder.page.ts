@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { NavigationExtras, Router } from '@angular/router';
+import { NavController } from '@ionic/angular'; // Importamos NavController
 
 @Component({
   selector: 'app-folder',
@@ -11,7 +11,7 @@ export class FolderPage implements OnInit {
   public folder!: string;
   private activatedRoute = inject(ActivatedRoute);
 
-  constructor(private router: Router) {}
+  constructor(private navCtrl: NavController) {} // Reemplazamos Router con NavController
 
   ngOnInit() {
     this.folder = this.activatedRoute.snapshot.paramMap.get('id') as string;
@@ -33,7 +33,7 @@ export class FolderPage implements OnInit {
     if (this.user.username.length != 0) {
       if (this.user.password.length != 0) {
         this.mensaje = 'Conexión exitosa';
-        let navigationExtras: NavigationExtras = {
+        let navigationExtras = {
           state: {
             username: this.user.username,
             password: this.user.password,
@@ -41,9 +41,15 @@ export class FolderPage implements OnInit {
         };
         this.cambiarSpinner();
         setTimeout(() => {
-          this.router.navigate(['/home'], navigationExtras);
           this.cambiarSpinner();
           this.mensaje = "";
+
+          // Navegamos con una animación personalizada
+          this.navCtrl.navigateForward('/home', {
+            animated: true,
+            animationDirection: 'forward', // Establecemos la animación de deslizamiento hacia adelante
+            state: navigationExtras.state,  // Pasamos el estado (datos)
+          });
         }, 2000);
       } else {
         this.mensaje = 'Contraseña vacía';
