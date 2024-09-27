@@ -18,12 +18,12 @@ export class FolderPage implements OnInit {
   }
 
   // Objeto JSON para usuario
-  user = {
+  public user = {
     username: '',
     password: '',
   };
-  mensaje = '';
-  spinner = false;
+  public mensaje = '';
+  public spinner = false;
 
   // Añadido para la visibilidad de la contraseña
   passwordType: string = 'password';
@@ -32,13 +32,19 @@ export class FolderPage implements OnInit {
   validar() {
     if (this.user.username.length != 0) {
       if (this.user.password.length != 0) {
-        this.mensaje = 'Conexión exitosa';
         let navigationExtras = {
           state: {
             username: this.user.username,
             password: this.user.password,
           },
         };
+
+        if (this.user.username = 'chamakin' && this.use) {
+
+        }
+
+        this.mensaje = 'Conexión exitosa';
+
         this.cambiarSpinner();
         setTimeout(() => {
           this.cambiarSpinner();

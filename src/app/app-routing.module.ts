@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { PerfilComponent } from './perfil/perfil.component';
 
 const routes: Routes = [
   {
@@ -13,7 +14,8 @@ const routes: Routes = [
   },
   {
     path: 'home',
-    loadChildren: () => import('./base/home/home.module').then( m => m.HomePageModule)
+    loadChildren: () => import('./base/home/home.module').then( m => m.HomePageModule),
+    children: [{ path:'perfil', component: PerfilComponent }]
   },
   {
     path: 'recoverpass',
