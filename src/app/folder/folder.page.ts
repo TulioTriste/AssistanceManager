@@ -39,8 +39,8 @@ export class FolderPage implements OnInit {
           },
         };
 
-        if (this.user.username = 'chamakin' && this.use) {
-
+        if (this.user.username == 'chamakin' && this.user.password =='pass1234') {
+          console.log('credenciales correctas')
         }
 
         this.mensaje = 'Conexión exitosa';
