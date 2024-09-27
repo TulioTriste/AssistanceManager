@@ -9,6 +9,11 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
+    path: '**',
+    redirectTo: 'error/Inbox',
+    pathMatch: 'full'
+  },
+  {
     path: 'folder/:id',
     loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule)
   },
@@ -28,13 +33,7 @@ const routes: Routes = [
   {
     path: 'error',
     loadChildren: () => import('./error/error.module').then( m => m.ErrorPageModule)
-  },
-  {
-    path: '**',
-    redirectTo: 'error',
-    pathMatch: 'full'
-  },
-
+  }
 ];
 
 @NgModule({
