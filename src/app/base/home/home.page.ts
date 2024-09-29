@@ -22,8 +22,5 @@ username = '';
 
   ngOnInit() {}
   
-  goBack() {
-    this.navCtrl.back();
-  }
 }
 
