@@ -13,7 +13,9 @@ export class RegisterPage implements OnInit {
     surname: '',
     age: '',
     level: '',
-    password: ''
+    password: '',
+    password2: '',
+    mail: ''
   };
 
   constructor(private router: Router, private toastController: ToastController) {}
@@ -30,11 +32,18 @@ export class RegisterPage implements OnInit {
       this.showAlert('Edad');
     } else if (!this.user.level) {
       this.showAlert('Nivel');
+    } else if (!this.user.mail){
+      this.showAlert('correo')
     } else if (!this.user.password) {
+      this.showAlert('Contraseña');
+    }  else if (!this.user.password2) {
       this.showAlert('Contraseña');
     } else if (!this.isPasswordStrong(this.user.password)) {
       this.showAlert('Contraseña no válida. Debe tener al menos 8 caracteres, incluir una mayúscula, una minúscula, un número y un carácter especial.');
-    } else {
+    } else if (this.user.password != this.user.password2){
+      await this.showProblema();
+    } 
+    else {
       // Mostrar mensaje de éxito y redirigir al login
       await this.presentToast();
       this.router.navigate(['/folder/inbox']);
@@ -45,7 +54,7 @@ export class RegisterPage implements OnInit {
   async showAlert(message: string) {
     const toast = await this.toastController.create({
       message: `Error en el campo: ${message}`,
-      duration: 3000,
+      duration: 3000, 
       position: 'top',
       color: 'danger',
     });
@@ -61,6 +70,15 @@ export class RegisterPage implements OnInit {
       color: 'success',
     });
     toast.present();
+  }
+  async showProblema() {
+    const show = await this.toastController.create({
+      message: 'Las contraseñas no coindicen, Intentalo nuevamente',
+      duration: 3000,
+      position: 'top',
+      color: 'danger',
+    });
+    show.present();
   }
 
   // Función para validar si la contraseña es robusta
