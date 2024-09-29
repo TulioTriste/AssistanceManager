@@ -8,27 +8,30 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: '**',
-    redirectTo: 'error/Inbox',
-    pathMatch: 'full'
-  },
-  {
     path: 'folder/:id',
-    loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule)
+    loadChildren: () => import('./folder/folder.module').then(m => m.FolderPageModule)
   },
   {
     path: 'home',
-    loadChildren: () => import('./base/home/home.module').then( m => m.HomePageModule)
+    loadChildren: () => import('./base/home/home.module').then(m => m.HomePageModule)
   },
   {
     path: 'recoverpass',
-    loadChildren: () => import('./recoverpass/recoverpass.module').then( m => m.RecoverpassPageModule)
+    loadChildren: () => import('./recoverpass/recoverpass.module').then(m => m.RecoverpassPageModule)
   },
   {
     path: 'register',
-    loadChildren: () => import('./register/register.module').then( m => m.RegisterPageModule)
+    loadChildren: () => import('./register/register.module').then(m => m.RegisterPageModule)
   },
-  
+  {
+    path: 'error_page',
+    loadChildren: () => import('./errorpage/errorpage.module').then(m => m.ErrorpagePageModule) // Asegúrate de que el nombre coincida
+  },
+  {
+    path: '**',
+    redirectTo: 'error_page', // Redirige a la página de error
+    pathMatch: 'full'
+  },
 ];
 
 @NgModule({
