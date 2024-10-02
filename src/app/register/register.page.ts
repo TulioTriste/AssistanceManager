@@ -12,7 +12,7 @@ export class RegisterPage implements OnInit {
     name: '',
     surname: '',
     age: '',
-    level: '',
+    category: '',
     password: '',
     password2: '',
     mail: ''
@@ -30,8 +30,8 @@ export class RegisterPage implements OnInit {
       this.showAlert('Apellidos');
     } else if (!this.user.age) {
       this.showAlert('Edad');
-    } else if (!this.user.level) {
-      this.showAlert('Nivel');
+    } else if (!this.user.category) {
+      this.showAlert('Category');
     } else if (!this.user.mail){
       this.showAlert('correo')
     } else if (!this.user.password) {
@@ -86,4 +86,15 @@ export class RegisterPage implements OnInit {
     const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-])[A-Za-z\d!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]{8,}$/;
     return passwordRegex.test(password);
   }
+
+  getPlaceholder(): string {
+    if (this.user.category === 'docente') {
+      return '@profesor.duoc.cl';
+    } else if (this.user.category === 'estudiante') {
+      return '@duocuc.cl';
+    } else {
+      return '';
+    }
+  }
+
 }
