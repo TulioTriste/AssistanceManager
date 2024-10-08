@@ -87,14 +87,6 @@ export class RegisterPage implements OnInit {
     return passwordRegex.test(password);
   }
 
-  getPlaceholder(): string {
-    if (this.user.category === 'docente') {
-      return '@profesor.duoc.cl';
-    } else if (this.user.category === 'estudiante') {
-      return '@duocuc.cl';
-    } else {
-      return '';
-    }
-  }
+ 
 
 }
