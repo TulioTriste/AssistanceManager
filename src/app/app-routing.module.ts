@@ -28,10 +28,15 @@ const routes: Routes = [
     loadChildren: () => import('./errorpage/errorpage.module').then(m => m.ErrorpagePageModule) // Asegúrate de que el nombre coincida
   },
   {
+    path: 'perfil',
+    loadChildren: () => import('./perfil/perfil.module').then( m => m.PerfilPageModule)
+  },
+  {
     path: '**',
     redirectTo: 'error_page', // Redirige a la página de error
     pathMatch: 'full'
   },
+
 ];
 
 @NgModule({

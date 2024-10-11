@@ -21,6 +21,7 @@ export class FolderPage implements OnInit {
   public user = {
     username: '',
     password: '',
+    category: 0, // Categoria mediante numeros (0: Nulo, 1: Docente, 2: Estudiante)
   };
   public mensaje = '';
   public spinner = false;
@@ -36,6 +37,7 @@ export class FolderPage implements OnInit {
           state: {
             username: this.user.username,
             password: this.user.password,
+            //category: this.user.category,
           },
         };
         this.mensaje = 'Conexión exitosa';
@@ -73,4 +75,11 @@ export class FolderPage implements OnInit {
   cambiarSpinner() {
     this.spinner = !this.spinner;
   }
+
+  // ejecutarSwitch() {
+  //   switch (this.user.category) {
+  //     case "Docente":
+  //       return 
+  //   }
+  // }
 }
