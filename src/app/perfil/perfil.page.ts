@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-perfil',
@@ -7,7 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PerfilPage implements OnInit {
 
-  constructor() { }
+  username = '';
+  qrData: string = 'https://www.google.com';
+
+  constructor(private router: Router, private navCtrl: NavController) {
+    const navegacion = this.router.getCurrentNavigation();
+    const state = navegacion?.extras.state as {
+      username: '';
+      password: '';
+    };
+    this.username = state.username;
+  }
 
   ngOnInit() {
   }
