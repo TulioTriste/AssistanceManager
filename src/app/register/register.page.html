@@ -39,22 +39,30 @@
           <ion-input [(ngModel)]="user.age" type="number" ></ion-input>
         </ion-item>
 
-        <!-- Nivel -->
-        <ion-item>
-          <ion-label>Nivel</ion-label>
-          <ion-select [(ngModel)]="user.level" placeholder="Seleccione su nivel">
-            <ion-select-option value="ninguno">Ninguno</ion-select-option>
-            <ion-select-option value="tecnico">Técnico</ion-select-option>
-            <ion-select-option value="universitario">Universitario</ion-select-option>
-            <ion-select-option value="magister">Magíster</ion-select-option>
-            <ion-select-option value="cancelar">Cancelar</ion-select-option>
+         <!-- Ocupación -->
+         <ion-item>
+          <ion-label>Selecciona tu categoria</ion-label>
+          <ion-select [(ngModel)]="user.category">
+            <ion-select-option value="docente">Docente</ion-select-option>
+            <ion-select-option value="estudiante">Estudiante</ion-select-option>
           </ion-select>
         </ion-item>
 
-        <!-- Contraseña -->
+        <!-- Correo -->
+        <ion-item>
+          <ion-label position="floating">Correo</ion-label>
+          <ion-input [(ngModel)]="user.mail" type="email" ></ion-input>
+          <ion-input type="text" class="email-placeholder"></ion-input>
+        </ion-item>
         <ion-item>
           <ion-label position="floating">Contraseña</ion-label>
           <ion-input [(ngModel)]="user.password" type="password" ></ion-input>
+        </ion-item>
+
+        <!-- Se valida que las 2 contraseñas sean iguales -->
+        <ion-item>
+          <ion-label position="floating">Contraseña</ion-label>
+          <ion-input [(ngModel)]="user.password2" type="password" ></ion-input>
         </ion-item>
 
         <!-- Botón de registro -->

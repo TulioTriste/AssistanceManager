@@ -20,3 +20,9 @@ body, ion-title, ion-label, ion-input, ion-card-title, ion-button {
     font-size: 16px; /* Ajusta el tamaño de la fuente para los botones */
   }
   
+.perfil-button {
+  display: flex;
+  justify-content: center; /* Centra horizontalmente */
+  height: 80%;
+  margin: 20%;
+}

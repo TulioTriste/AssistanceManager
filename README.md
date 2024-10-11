@@ -4,3 +4,6 @@
 
 - Terminal - nvm install 20.17 ?
 - nvm use 20.17 ?
+
+**Faltas**
+- Fecha en el registro

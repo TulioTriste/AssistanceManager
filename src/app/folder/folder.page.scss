@@ -1,8 +1,3 @@
-/* Estilo para el botón del menú */
-ion-menu-button {
-  color: var(--ion-color-primary); /* Usa el color primario definido en tu tema */
-}
-
 /* Contenedor centrado verticalmente */
 #container {
   text-align: center;
@@ -28,76 +23,6 @@ ion-menu-button {
 
 #container a {
   text-decoration: none;
-}
-
-/* Animación de bienvenida */
-.bienvenida {
-  text-align: center;
-  margin-top: 10px;
-}
-
-/* Animación para el título */
-#bienvenidaAnimada h1 {
-  animation: fadeIn 4s infinite;
-}
-
-/* Keyframes para la animación de desvanecimiento */
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-  50% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  100% {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-}
-
-/* Personalización del ion-card */
-ion-card {
-  margin: 20px;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Sombra sutil */
-  border-radius: 12px; /* Bordes redondeados */
-}
-
-/* Botón de ingresar */
-ion-button {
-  margin: 20px 0;
-  --background: #3880ff;
-  --background-activated: #4c8dff;
-  --border-radius: 8px;
-  --padding-start: 16px;
-  --padding-end: 16px;
-  color: #fff;
-}
-
-/* Estilo del texto en ion-card-content */
-ion-card-content {
-  font-size: 1.2em;
-  text-align: center;
-  margin-bottom: 20px;
-  color: #666;
-}
-
-/* Inputs (usuario y contraseña) */
-ion-input {
-  --padding-start: 8px;
-  --padding-end: 8px;
-}
-
-ion-item {
-  --inner-padding-end: 8px;
-}
-
-/* Icono de ojo para la contraseña */
-ion-icon {
-  font-size: 1.2em;
-  color: #666;
-  cursor: pointer;
 }
 
 /* Mensaje de validación */
@@ -128,11 +53,6 @@ ion-button[fill="clear"] {
   text-transform: capitalize;
 }
 
-/* Hover sobre los botones */
-ion-button[fill="clear"]:hover {
-  --color: #0056b3;
-}
-
 /* Añadir margen entre los botones */
 ion-item {
   margin-bottom: 10px;
@@ -142,11 +62,6 @@ ion-item {
 ion-item ion-button {
   --color: var(--ion-color-primary); /* Color de texto */
   font-weight: bold;
-}
-
-/* Modificaciones generales */
-ion-item[fill="clear"] {
-  --ion-color-primary: #3880ff; /* Asegura que los botones usen el color correcto */
 }
 
 /* Estilo y animación para el ícono de login */

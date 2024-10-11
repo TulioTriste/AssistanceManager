@@ -1,12 +1,11 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/"></ion-back-button> <!-- Botón de retroceso -->
+      <ion-back-button [routerLink]="['/folder/inbox']" ></ion-back-button> <!-- Revisa la ruta -->
     </ion-buttons>
     <ion-title>home</ion-title>
   </ion-toolbar>
 </ion-header>
-
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
@@ -14,8 +13,13 @@
     </ion-toolbar>
   </ion-header>
 
-  
   <h3>Bienvenido/a</h3>
   <h1>{{username}}</h1>
-  <h3>a la Pagina de Inicio</h3>
+  <h3>a la Página de Inicio</h3>
+
+  <div>
+    <ion-button class="perfil-button" color="warning" (click)="goPerfil()">Ir a mi Perfil</ion-button>
+  </div>
 </ion-content>
+
+

@@ -9,27 +9,31 @@ const routes: Routes = [
   },
   {
     path: 'folder/:id',
-    loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule)
+    loadChildren: () => import('./folder/folder.module').then(m => m.FolderPageModule)
   },
   {
     path: 'home',
-    loadChildren: () => import('./base/home/home.module').then( m => m.HomePageModule)
+    loadChildren: () => import('./base/home/home.module').then(m => m.HomePageModule)
   },
   {
     path: 'recoverpass',
-    loadChildren: () => import('./recoverpass/recoverpass.module').then( m => m.RecoverpassPageModule)
+    loadChildren: () => import('./recoverpass/recoverpass.module').then(m => m.RecoverpassPageModule)
   },
   {
     path: 'register',
-    loadChildren: () => import('./register/register.module').then( m => m.RegisterPageModule)
+    loadChildren: () => import('./register/register.module').then(m => m.RegisterPageModule)
   },
   {
-    path: 'error',
-    loadChildren: () => import('./error/error.module').then( m => m.ErrorPageModule)
+    path: 'error_page',
+    loadChildren: () => import('./errorpage/errorpage.module').then(m => m.ErrorpagePageModule) // Asegúrate de que el nombre coincida
+  },
+  {
+    path: 'perfil',
+    loadChildren: () => import('./perfil/perfil.module').then( m => m.PerfilPageModule)
   },
   {
     path: '**',
-    redirectTo: 'error',
+    redirectTo: 'error_page', // Redirige a la página de error
     pathMatch: 'full'
   },
 
