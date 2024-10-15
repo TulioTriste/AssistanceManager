@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { Firestore, collection, addDoc } from '@angular/fire/firestore'; // Importar Firestore
+import { OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular'; // Importar ToastController
 
@@ -18,7 +20,11 @@ export class RegisterPage implements OnInit {
     mail: ''
   };
 
-  constructor(private router: Router, private toastController: ToastController) {}
+  constructor(
+    private router: Router,
+    private toastController: ToastController,
+    private firestore: Firestore // Inyección de Firestore
+  ) {}
 
   ngOnInit() {}
 
@@ -31,22 +37,28 @@ export class RegisterPage implements OnInit {
     } else if (!this.user.age) {
       this.showAlert('Edad');
     } else if (!this.user.category) {
-      this.showAlert('Category');
-    } else if (!this.user.mail){
-      this.showAlert('correo')
+      this.showAlert('Categoría');
+    } else if (!this.user.mail) {
+      this.showAlert('Correo');
     } else if (!this.user.password) {
       this.showAlert('Contraseña');
-    }  else if (!this.user.password2) {
+    } else if (!this.user.password2) {
       this.showAlert('Contraseña');
     } else if (!this.isPasswordStrong(this.user.password)) {
       this.showAlert('Contraseña no válida. Debe tener al menos 8 caracteres, incluir una mayúscula, una minúscula, un número y un carácter especial.');
-    } else if (this.user.password != this.user.password2){
+    } else if (this.user.password !== this.user.password2) {
       await this.showProblema();
-    } 
-    else {
-      // Mostrar mensaje de éxito y redirigir al login
-      await this.presentToast();
-      this.router.navigate(['/folder/inbox']);
+    } else {
+      // Guardar datos en Firestore
+      try {
+        const userRef = collection(this.firestore, 'users'); // Referencia a la colección
+        await addDoc(userRef, this.user); // Agregar el documento
+        await this.presentToast();
+        this.router.navigate(['/folder/inbox']);
+      } catch (error) {
+        console.error('Error al registrar el usuario: ', error);
+        await this.showAlert('Error al registrar el usuario. Inténtalo nuevamente.');
+      }
     }
   }
 
@@ -54,7 +66,7 @@ export class RegisterPage implements OnInit {
   async showAlert(message: string) {
     const toast = await this.toastController.create({
       message: `Error en el campo: ${message}`,
-      duration: 3000, 
+      duration: 3000,
       position: 'top',
       color: 'danger',
     });
@@ -71,9 +83,10 @@ export class RegisterPage implements OnInit {
     });
     toast.present();
   }
+
   async showProblema() {
     const show = await this.toastController.create({
-      message: 'Las contraseñas no coindicen, Intentalo nuevamente',
+      message: 'Las contraseñas no coinciden. Inténtalo nuevamente.',
       duration: 3000,
       position: 'top',
       color: 'danger',
@@ -86,7 +99,4 @@ export class RegisterPage implements OnInit {
     const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-])[A-Za-z\d!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]{8,}$/;
     return passwordRegex.test(password);
   }
-
- 
-
 }
