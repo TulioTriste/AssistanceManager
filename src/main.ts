@@ -9,7 +9,7 @@ import { initializeApp } from 'firebase/app';
 import { getAnalytics } from 'firebase/analytics';
 
 // Configuración de Firebase (usa las credenciales que te proporcionaron)
-const firebaseConfig = {
+export const firebaseConfig = {
   apiKey: "AIzaSyBwLmwNEci3IDWE3pVoMVxjo6JU-Dnnps4",
   authDomain: "assistancemanager-70b10.firebaseapp.com",
   projectId: "assistancemanager-70b10",
