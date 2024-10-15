@@ -3,6 +3,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { main } from '../main';
+
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
@@ -15,6 +19,8 @@ import { ShowBackButtonDirective } from './show-back-button.directive'; // Impor
   ],
   imports: [
     BrowserModule,
+    AngularFireModule.initializeApp(main.firebaseConfig),
+    AngularFireAuthModule,
     IonicModule.forRoot(),
     AppRoutingModule
   ],
