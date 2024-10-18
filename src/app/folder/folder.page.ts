@@ -1,6 +1,9 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NavController } from '@ionic/angular'; // Importamos NavController
+import { Firestore, collection, query, where, getDocs } from '@angular/fire/firestore';
+import { Router } from '@angular/router';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-folder',
@@ -17,6 +20,7 @@ export class FolderPage implements OnInit {
     this.folder = this.activatedRoute.snapshot.paramMap.get('id') as string;
   }
 
+  
   // Objeto JSON para usuario
   public user = {
     username: '',
@@ -61,6 +65,7 @@ export class FolderPage implements OnInit {
       this.mensaje = 'Usuario vacío';
     }
   }
+  
 
   togglePasswordVisibility() {
     if (this.passwordType === 'password') {

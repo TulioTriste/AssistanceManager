@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Firestore, collection, addDoc } from '@angular/fire/firestore'; // Importar Firestore
+import { Firestore, collection, addDoc , query, where, getDocs} from '@angular/fire/firestore'; // Importar Firestore
 import { OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular'; // Importar ToastController
@@ -52,17 +52,45 @@ export class RegisterPage implements OnInit {
     } else if (this.user.password !== this.user.password2) {
       await this.showProblema();
     } else {
-      // Guardar datos en Firestore
-      try {
-        const userRef = collection(this.firestore, 'users'); // Referencia a la colección
-        await addDoc(userRef, this.user); // Agregar el documento
-        await this.presentToast();
-        this.router.navigate(['/folder/inbox']);
-      } catch (error) {
-        console.error('Error al registrar el usuario: ', error);
-        await this.showAlert('Error al registrar el usuario. Inténtalo nuevamente.');
+      // Verificar si el usuario ya existe
+      const userExists = await this.checkIfUserExists(this.user.mail);
+
+      if (userExists) {
+        // Mostrar mensaje de error si el usuario ya existe
+        this.Badmessage('Este correo ya está registrado. Por favor, utiliza otro.');
+      } else {
+        // Guardar datos en Firestore si no existe
+        try {
+          
+          const userRef = collection(this.firestore, 'users'); // Referencia a la colección
+          await addDoc(userRef, this.user); // Agregar el documento
+          await this.presentToast();
+          this.router.navigate(['/folder/inbox']);
+        } catch (error) {
+          console.error('Error al registrar el usuario: ', error);
+          await this.showAlert('Error al registrar el usuario. Inténtalo nuevamente.');
+        }
       }
     }
+  }
+
+  // Función para verificar si el usuario ya existe en Firestore
+  async checkIfUserExists(email: string): Promise<boolean> {
+    const userRef = collection(this.firestore, 'users'); // Referencia a la colección de usuarios
+    const q = query(userRef, where('mail', '==', email)); // Consulta para buscar el correo
+    const querySnapshot = await getDocs(q);
+
+    return !querySnapshot.empty; // Si no está vacío, el usuario ya existe
+  }
+
+  async Badmessage(message: string) {
+    const toast = await this.toastController.create({
+      message: `${message}`,
+      duration: 4000,
+      position: 'top',
+      color: 'danger',
+    });
+    toast.present();
   }
 
   // Función para mostrar una alerta en rojo cuando un campo está vacío o incorrecto
