@@ -14,6 +14,7 @@ export class RegisterPage implements OnInit {
     name: '',
     surname: '',
     age: '',
+    date: '',
     category: '',
     password: '',
     password2: '',
@@ -36,6 +37,8 @@ export class RegisterPage implements OnInit {
       this.showAlert('Apellidos');
     } else if (!this.user.age) {
       this.showAlert('Edad');
+    } else if (!this.user.date) {
+      this.showAlert('Fecha de Nacimiento');
     } else if (!this.user.category) {
       this.showAlert('Categoría');
     } else if (!this.user.mail) {
@@ -98,5 +101,26 @@ export class RegisterPage implements OnInit {
   isPasswordStrong(password: string): boolean {
     const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-])[A-Za-z\d!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]{8,}$/;
     return passwordRegex.test(password);
+  }
+
+  calcularEdad() {
+    const hoy = new Date();
+    const nacimiento = new Date(this.user.date);
+
+    // Asegurarse de que la fecha de nacimiento sea válida
+    if (isNaN(nacimiento.getTime())) {
+      console.error('Fecha de nacimiento inválida');
+      return "Ingrese el Año de Nacimiento";
+    }
+
+    let edad = hoy.getFullYear() - nacimiento.getFullYear();
+    const mes = hoy.getMonth() - nacimiento.getMonth();
+
+    // Ajustar la edad si el mes actual es menor que el mes de nacimiento
+    if (mes < 0 || (mes === 0 && hoy.getDate() < nacimiento.getDate())) {
+      edad--;
+    }
+
+    return edad + ' Años';
   }
 }
