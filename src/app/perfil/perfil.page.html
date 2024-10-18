@@ -1,27 +1,49 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button [routerLink]="['/home']" ></ion-back-button> <!-- Revisa la ruta -->
+      <ion-back-button [routerLink]="['/home']"></ion-back-button> <!-- Botón de retroceso a 'home' -->
     </ion-buttons>
-    <ion-title>home</ion-title>
+    <ion-title>Perfil</ion-title>
   </ion-toolbar>
 </ion-header>
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">home</ion-title>
-    </ion-toolbar>
-  </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">perfil</ion-title>
+      <ion-title size="large">Perfil</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <h1>Perfil de {{username}}</h1>
-  <div class="ion-text-center">
-    <!-- <qrcode [qrdata]="qrData" [width]="300" [errorCorrectionLevel]="'H'"></qrcode> -->
-  </div>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Perfil de {{username}}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <div class="profile-info">
+        <!-- Imagen de perfil -->
+        <div class="ion-text-center">
+          <img src="assets/imgs/profile_placeholder.png" alt="Imagen de perfil" class="profile-image">
+        </div>
+
+        <!-- Información del usuario
+        <div class="profile-details ion-text-center">
+          <h2>{{ user.name }} {{ user.surname }}</h2>
+          <p><strong>Correo:</strong> {{ user.mail }}</p>
+          <p><strong>Edad:</strong> {{ user.age }} años</p>
+          <p><strong>Categoría:</strong> {{ user.category }}</p>
+        </div> -->
+
+        <!-- Código QR (si es necesario, puedes descomentarlo) -->
+        <!-- <div class="ion-text-center">
+          <qrcode [qrdata]="qrData" [width]="300" [errorCorrectionLevel]="'H'"></qrcode>
+        </div> -->
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Botón de Cerrar Sesión
+  <ion-button expand="full" color="danger" (click)="logout()">
+    Cerrar Sesión
+  </ion-button> -->
+
 </ion-content>
