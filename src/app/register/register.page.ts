@@ -35,8 +35,6 @@ export class RegisterPage implements OnInit {
       this.showAlert('Nombre');
     } else if (!this.user.surname) {
       this.showAlert('Apellidos');
-    } else if (!this.user.age) {
-      this.showAlert('Edad');
     } else if (!this.user.date) {
       this.showAlert('Fecha de Nacimiento');
     } else if (!this.user.category) {

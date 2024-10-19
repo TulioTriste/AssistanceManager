@@ -1,9 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NavController } from '@ionic/angular'; // Importamos NavController
-import { Firestore, collection, query, where, getDocs } from '@angular/fire/firestore';
-import { Router } from '@angular/router';
-import { ToastController } from '@ionic/angular';
+import { Firestore, collection, addDoc , query, where, getDocs} from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-folder',
@@ -14,7 +12,10 @@ export class FolderPage implements OnInit {
   public folder!: string;
   private activatedRoute = inject(ActivatedRoute);
 
-  constructor(private navCtrl: NavController) {} // Reemplazamos Router con NavController
+  constructor(
+    private navCtrl: NavController,
+    private firestore: Firestore
+  ) {} // Reemplazamos Router con NavController
 
   ngOnInit() {
     this.folder = this.activatedRoute.snapshot.paramMap.get('id') as string;
@@ -23,7 +24,7 @@ export class FolderPage implements OnInit {
   
   // Objeto JSON para usuario
   public user = {
-    username: '',
+    email: '',
     password: '',
     category: 0, // Categoria mediante numeros (0: Nulo, 1: Docente, 2: Estudiante)
   };
@@ -34,30 +35,36 @@ export class FolderPage implements OnInit {
   passwordType: string = 'password';
   eyeIcon: string = 'eye-off'; // Por defecto el ojo está cerrado
 
-  validar() {
-    if (this.user.username.length != 0) {
+  async validar() {
+    if (this.user.email.length != 0) {
       if (this.user.password.length != 0) {
         let navigationExtras = {
           state: {
-            username: this.user.username,
+            email: this.user.email,
             password: this.user.password,
             //category: this.user.category,
           },
         };
-        this.mensaje = 'Conexión exitosa';
 
-        this.cambiarSpinner();
-        setTimeout(() => {
+        const userExists = await this.checkIfUserExists(this.user.email, this.user.password);
+        if (userExists) {
+          this.mensaje = 'Conexión exitosa';
+
           this.cambiarSpinner();
-          this.mensaje = "";
+          setTimeout(() => {
+            this.cambiarSpinner();
+            this.mensaje = "";
 
-          // Navegamos con una animación personalizada
-          this.navCtrl.navigateForward('/home', {
-            animated: true,
-            animationDirection: 'forward', // Establecemos la animación de deslizamiento hacia adelante
-            state: navigationExtras.state,  // Pasamos el estado (datos)
-          });
-        }, 2000);
+            // Navegamos con una animación personalizada
+            this.navCtrl.navigateForward('/home', {
+              animated: true,
+              animationDirection: 'forward', // Establecemos la animación de deslizamiento hacia adelante
+              state: navigationExtras.state,  // Pasamos el estado (datos)
+            });
+          }, 2000);
+        } else {
+          this.mensaje = 'Usuario o contraseña incorrectos';
+        }
       } else {
         this.mensaje = 'Contraseña vacía';
       }
@@ -66,6 +73,17 @@ export class FolderPage implements OnInit {
     }
   }
   
+  // Función para verificar si el usuario ya existe en Firestore
+  async checkIfUserExists(email: string, password: string): Promise<boolean> {
+    const userRef = collection(this.firestore, 'users'); // Referencia a la colección de usuarios
+    const q = query(
+      userRef, 
+      where('mail', '==', email),
+      where('password', '==', password)); // Consulta para buscar el correo
+    const querySnapshot = await getDocs(q);
+
+    return !querySnapshot.empty; // Si no está vacío, el usuario ya existe
+  }
 
   togglePasswordVisibility() {
     if (this.passwordType === 'password') {

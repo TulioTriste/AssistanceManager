@@ -31,6 +31,7 @@
     "@capacitor/status-bar": "6.0.1",
     "@ionic/angular": "^8.0.0",
     "angularx-qrcode": "^18.0.2",
+    "AssistanceManager": "file:",
     "firebase": "^10.14.1",
     "ionicons": "^7.0.0",
     "progress-spinner": "^1.1.0",
