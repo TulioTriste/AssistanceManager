@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NavController } from '@ionic/angular'; // Importamos NavController
-import { Firestore, collection, addDoc , query, where, getDocs} from '@angular/fire/firestore';
+import { Firestore, collection, query, where, getDocs, QuerySnapshot, DocumentData} from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-folder',
@@ -26,7 +26,11 @@ export class FolderPage implements OnInit {
   public user = {
     email: '',
     password: '',
-    category: 0, // Categoria mediante numeros (0: Nulo, 1: Docente, 2: Estudiante)
+    name: '',
+    surname: '',
+    age: '',
+    date: '',
+    category: '', // Categoria mediante numeros (0: Nulo, 1: Docente, 2: Estudiante)
   };
   public mensaje = '';
   public spinner = false;
@@ -38,7 +42,7 @@ export class FolderPage implements OnInit {
   async validar() {
     if (this.user.email.length != 0) {
       if (this.user.password.length != 0) {
-        let navigationExtras = {
+        let navigationExtras: any = {
           state: {
             email: this.user.email,
             password: this.user.password,
@@ -49,6 +53,16 @@ export class FolderPage implements OnInit {
         const userExists = await this.checkIfUserExists(this.user.email, this.user.password);
         if (userExists) {
           this.mensaje = 'Conexión exitosa';
+
+          // const user = await this.getUserData(this.user.email, this.user.password);
+          // const usersData: any[] = [];
+
+          // user.forEach((doc) => {
+          //     const data = doc.data();
+          //     usersData.push({...data }); // Incluye el ID del documento
+          // });
+          // navigationExtras.state = usersData;
+          // this.mensaje = navigationExtras.state;
 
           this.cambiarSpinner();
           setTimeout(() => {
@@ -83,6 +97,17 @@ export class FolderPage implements OnInit {
     const querySnapshot = await getDocs(q);
 
     return !querySnapshot.empty; // Si no está vacío, el usuario ya existe
+  }
+
+  // Función de la data del usuario cargada
+  async getUserData(email: string, password: string): Promise<QuerySnapshot<DocumentData, DocumentData>> {
+    const userRef = collection(this.firestore, 'users'); // Referencia a la colección de usuarios
+    const q = query(
+      userRef, 
+      where('mail', '==', email),
+      where('password', '==', password)); // Consulta para buscar el correo
+
+    return await getDocs(q); // Si no está vacío, el usuario
   }
 
   togglePasswordVisibility() {
