@@ -25,13 +25,23 @@ import { ShowBackButtonDirective } from './show-back-button.directive'; // Impor
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     provideAnimationsAsync(),
     provideFirebaseApp(() => initializeApp({ 
-      apiKey: "AIzaSyBwLmwNEci3IDWE3pVoMVxjo6JU-Dnnps4",
-      authDomain: "assistancemanager-70b10.firebaseapp.com",
-      projectId: "assistancemanager-70b10",
-      storageBucket: "assistancemanager-70b10.appspot.com",
-      messagingSenderId: "372561889746",
-      appId: "1:372561889746:web:f7c6374bfd04dcda94200b",
-      measurementId: "G-CKWTXG7FNG" })),
+      // Bastian Ampuero DATABASE
+      // apiKey: "AIzaSyBwLmwNEci3IDWE3pVoMVxjo6JU-Dnnps4",
+      // authDomain: "assistancemanager-70b10.firebaseapp.com",
+      // projectId: "assistancemanager-70b10",
+      // storageBucket: "assistancemanager-70b10.appspot.com",
+      // messagingSenderId: "372561889746",
+      // appId: "1:372561889746:web:f7c6374bfd04dcda94200b",
+      // measurementId: "G-CKWTXG7FNG" })),
+
+      // Sebastián Morales DATABASE
+      apiKey: "AIzaSyChKIwFMO2YAeaLf34kseebRP2HTseOTRQ",
+      authDomain: "assistancemanager-a9ef1.firebaseapp.com",
+      projectId: "assistancemanager-a9ef1",
+      storageBucket: "assistancemanager-a9ef1.appspot.com",
+      messagingSenderId: "401648947203",
+      appId: "1:401648947203:web:87626c39c28f1a10847e36",
+      measurementId: "G-NJ1VQK5RFN" })),
     provideFirestore(() => getFirestore()),
   ],
   bootstrap: [AppComponent]
