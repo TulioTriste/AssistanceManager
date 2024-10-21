@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { loginGuard } from './guard/login.guard';
 
 const routes: Routes = [
   {
@@ -32,11 +33,20 @@ const routes: Routes = [
     loadChildren: () => import('./perfil/perfil.module').then( m => m.PerfilPageModule)
   },
   {
+    path: 'docente-perfil',
+    loadChildren: () => import('./perfiles/docente-perfil/docente-perfil.module').then( m => m.DocentePerfilPageModule),
+    canActivate: [loginGuard]
+  },
+  {
+    path: 'alumno-perfil',
+    loadChildren: () => import('./perfiles/alumno-perfil/alumno-perfil.module').then( m => m.AlumnoPerfilPageModule),
+    canActivate: [loginGuard]
+  },
+  {
     path: '**',
     redirectTo: 'error_page', // Redirige a la página de error
     pathMatch: 'full'
   },
-
 ];
 
 @NgModule({
