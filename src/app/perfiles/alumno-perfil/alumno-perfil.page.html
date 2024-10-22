@@ -24,15 +24,15 @@
     <ion-item class="op_diponibles">
       <h6>Acciones disponibles</h6>
     </ion-item>
-      <ion-list>
-        <ion-item button>
-          <ion-label>Escanear Codigo QR</ion-label>
-          <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
-        </ion-item>
-        <ion-item button>
-          <ion-label>Consultar más opciones</ion-label>
-          <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
-        </ion-item>
-      </ion-list>
+    <ion-list>
+      <ion-item button (click)="startScan()">
+        <ion-label>Escanear Codigo QR</ion-label>
+        <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
+      </ion-item>
+      <ion-item button>
+        <ion-label>Consultar más opciones</ion-label>
+        <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
+      </ion-item>
+    </ion-list>
   </main>
 </ion-content>

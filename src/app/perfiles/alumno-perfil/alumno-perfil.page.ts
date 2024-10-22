@@ -4,6 +4,7 @@ import { NavController } from '@ionic/angular';
 import { User } from 'src/app/services/user.service';
 
 import { BarcodeScanner, BarcodeFormat, LensFacing } from '@capacitor-mlkit/barcode-scanning';
+import { Dialog } from '@capacitor/dialog';
 
 @Component({
   selector: 'app-alumno-perfil',
@@ -39,7 +40,14 @@ export class AlumnoPerfilPage implements OnInit {
     );
   
     // Start the barcode scanner
-    await BarcodeScanner.startScan();
+    try {
+      await BarcodeScanner.startScan();
+    } catch {
+      await Dialog.alert({
+        title: 'Error',
+        message: 'Tienes errores intentando iniciar la camara',
+      });
+    }
   };
   
   async stopScan() {
