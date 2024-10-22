@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { NavController } from '@ionic/angular';
+import { User } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-docente-perfil',
@@ -7,7 +10,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DocentePerfilPage implements OnInit {
 
-  constructor() { }
+  public userData: User | undefined;
+
+  constructor(private router: Router, private navCtrl: NavController) {
+    this.userData = history.state as User;
+  }
 
   ngOnInit() {
   }
