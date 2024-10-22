@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/"></ion-back-button> <!-- Botón de retroceso -->
+      <ion-back-button defaultHref="/"></ion-back-button>
     </ion-buttons>
     <ion-title>Register</ion-title>
   </ion-toolbar>
@@ -21,54 +21,63 @@
 
     <ion-card-content>
       <ion-list>
-        <!-- Nombre -->
-        <ion-item>
-          <ion-label position="floating">Nombre</ion-label>
-          <ion-input [(ngModel)]="user.name" ></ion-input>
-        </ion-item>
+        <form (ngSubmit)="register()"> <!-- Añade el evento de envío -->
+          <!-- Nombre -->
+          <ion-item>
+            <ion-label position="floating">Nombre</ion-label>
+            <ion-input [(ngModel)]="user.name" name="name"></ion-input>
+          </ion-item>
 
-        <!-- Apellidos -->
-        <ion-item>
-          <ion-label position="floating">Apellidos</ion-label>
-          <ion-input [(ngModel)]="user.surname" ></ion-input>
-        </ion-item>
+          <!-- Apellidos -->
+          <ion-item>
+            <ion-label position="floating">Apellidos</ion-label>
+            <ion-input [(ngModel)]="user.surname" name="surname"></ion-input>
+          </ion-item>
 
-        <!-- Edad -->
-        <ion-item>
-          <ion-label position="floating">Edad</ion-label>
-          <ion-input [(ngModel)]="user.age" type="number" ></ion-input>
-        </ion-item>
+          <!-- Apellidos -->
+          <ion-item>
+            <ion-label position="floating">Fecha de Nacimiento</ion-label>
+            <ion-input [(ngModel)]="user.date" type="date" name="date"></ion-input>
+          </ion-item>
 
-         <!-- Ocupación -->
-         <ion-item>
-          <ion-label>Selecciona tu categoria</ion-label>
-          <ion-select [(ngModel)]="user.category">
-            <ion-select-option value="docente">Docente</ion-select-option>
-            <ion-select-option value="estudiante">Estudiante</ion-select-option>
-          </ion-select>
-        </ion-item>
+          <!-- Edad -->
+          <ion-item>
+            <ion-label position="floating">Edad</ion-label>
+            <ion-label>{{ calcularEdad() }}</ion-label>
+          </ion-item>
 
-        <!-- Correo -->
-        <ion-item>
-          <ion-label position="floating">Correo</ion-label>
-          <ion-input [(ngModel)]="user.mail" type="email" ></ion-input>
-          <ion-input type="text" class="email-placeholder"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label position="floating">Contraseña</ion-label>
-          <ion-input [(ngModel)]="user.password" type="password" ></ion-input>
-        </ion-item>
+          <!-- Ocupación -->
+          <ion-item>
+            <ion-label>Selecciona tu categoría</ion-label>
+            <ion-select [(ngModel)]="user.category" name="category">
+              <ion-select-option value="docente">Docente</ion-select-option>
+              <ion-select-option value="estudiante">Estudiante</ion-select-option>
+            </ion-select>
+          </ion-item>
 
-        <!-- Se valida que las 2 contraseñas sean iguales -->
-        <ion-item>
-          <ion-label position="floating">Contraseña</ion-label>
-          <ion-input [(ngModel)]="user.password2" type="password" ></ion-input>
-        </ion-item>
+          <!-- Correo -->
+          <ion-item>
+            <ion-label position="floating">Correo</ion-label>
+            <ion-input [(ngModel)]="user.mail" type="email" name="mail"></ion-input>
+          </ion-item>
 
-        <!-- Botón de registro -->
-        <ion-item>
-          <ion-button expand="full" color="primary" (click)="register()">Registrarse</ion-button>
-        </ion-item>
+          <!-- Contraseña -->
+          <ion-item>
+            <ion-label position="floating">Contraseña</ion-label>
+            <ion-input [(ngModel)]="user.password" type="password" name="password"></ion-input>
+          </ion-item>
+
+          <!-- Confirmar Contraseña -->
+          <ion-item>
+            <ion-label position="floating">Confirmar Contraseña</ion-label>
+            <ion-input [(ngModel)]="user.password2" type="password" name="password2"></ion-input>
+          </ion-item>
+
+          <!-- Botón de registro -->
+          <ion-item>
+            <ion-button expand="full" color="primary" type="submit">Registrarse</ion-button> <!-- Cambia el botón a tipo submit -->
+          </ion-item>
+        </form>
       </ion-list>
     </ion-card-content>
   </ion-card>
