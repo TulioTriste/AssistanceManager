@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { User } from 'src/app/services/user.service';
-import { loginGuard } from 'src/app/guard/login.guard';
 
 @Component({
   selector: 'app-home',
@@ -18,7 +17,7 @@ export class HomePage implements OnInit {
     this.userData = history.state as User; // Cargar userData desde el estado de navegación
 
     if (this.userData != null) {
-      this.username = this.userData?.name;
+      this.username = this.userData.name;
     } else {
       console.log("Error intentando cargar al usuario.")
       this.navCtrl.navigateForward('/error_page');
