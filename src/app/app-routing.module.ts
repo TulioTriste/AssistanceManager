@@ -29,10 +29,6 @@ const routes: Routes = [
     loadChildren: () => import('./errorpage/errorpage.module').then(m => m.ErrorpagePageModule) // Asegúrate de que el nombre coincida
   },
   {
-    path: 'perfil',
-    loadChildren: () => import('./perfil/perfil.module').then( m => m.PerfilPageModule)
-  },
-  {
     path: 'docente-perfil',
     loadChildren: () => import('./perfiles/docente-perfil/docente-perfil.module').then( m => m.DocentePerfilPageModule),
     canActivate: [loginGuard]
