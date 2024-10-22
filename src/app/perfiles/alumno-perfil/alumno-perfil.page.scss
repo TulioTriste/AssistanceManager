@@ -1,0 +1,33 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+ .img_perfil{
+    width: 100px;  // O el tamaño que desees
+    height: auto;
+    border-radius: 50%;  // Si quieres que la imagen sea circular
+    padding-top: 5%;
+  }
+.center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.edit_profile{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 5%;
+}
+.button_qr{
+    display: flex;
+    justify-content: left;
+    align-items: start;
+    padding-top: 5%;
+}
+.op_diponibles{
+    background-color: gray
+    
+}

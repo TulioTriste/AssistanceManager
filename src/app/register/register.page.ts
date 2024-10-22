@@ -29,8 +29,18 @@ export class RegisterPage implements OnInit {
 
   ngOnInit() {}
 
-  async register() {
+ async register() {
     // Validar si todos los campos están llenos
+    const partes = this.user.mail.split('@');
+    let dominio;
+    let categ;
+    if(this.user.category === 'docente')
+      categ = 'profesor.duoc.cl';
+    else if(this.user.category === 'estudiante'){
+      categ = 'duocuc.cl';
+    }else{
+      categ = '';
+    }
     if (!this.user.name) {
       this.showAlert('Nombre');
     } else if (!this.user.surname) {
@@ -49,24 +59,33 @@ export class RegisterPage implements OnInit {
       this.showAlert('Contraseña no válida. Debe tener al menos 8 caracteres, incluir una mayúscula, una minúscula, un número y un carácter especial.');
     } else if (this.user.password !== this.user.password2) {
       await this.showProblema();
-    } else {
-      // Verificar si el usuario ya existe
-      const userExists = await this.checkIfUserExists(this.user.mail);
-
-      if (userExists) {
-        // Mostrar mensaje de error si el usuario ya existe
-        this.Badmessage('Este correo ya está registrado. Por favor, utiliza otro.');
+    }  else if (partes.length === 2) {
+      // Guarda la parte después del "@"
+      dominio = partes[1];
+      console.log('Dominio:', dominio); // Para depuración, imprime el dominio
+    
+      // Validar si el dominio coincide con la categoría
+      if (dominio !== categ) {
+        console.log('El dominio no coincide con la categoría.');
+        this.Badmessage('El dominio no coincide con la categoría elige "@profesor.duoc.cl" o "@duocuc.cl"'); 
       } else {
-        // Guardar datos en Firestore si no existe
-        try {
-          
-          const userRef = collection(this.firestore, 'users'); // Referencia a la colección
-          await addDoc(userRef, this.user); // Agregar el documento
-          await this.presentToast();
-          this.router.navigate(['/folder/inbox']);
-        } catch (error) {
-          console.error('Error al registrar el usuario: ', error);
-          await this.showAlert('Error al registrar el usuario. Inténtalo nuevamente.');
+        // Verificar si el usuario ya existe
+        const userExists = await this.checkIfUserExists(this.user.mail);
+    
+        if (userExists) {
+          // Mostrar mensaje de error si el usuario ya existe
+          this.Badmessage('Este correo ya está registrado. Por favor, utiliza otro.');
+        } else {
+          // Guardar datos en Firestore si no existe
+          try {
+            const userRef = collection(this.firestore, 'users'); // Referencia a la colección
+            await addDoc(userRef, this.user); // Agregar el documento
+            await this.presentToast();
+            this.router.navigate(['/folder/inbox']);
+          } catch (error) {
+            console.error('Error al registrar el usuario: ', error);
+            await this.showAlert('Error al registrar el usuario. Inténtalo nuevamente.');
+          }
         }
       }
     }
@@ -74,11 +93,11 @@ export class RegisterPage implements OnInit {
 
   // Función para verificar si el usuario ya existe en Firestore
   async checkIfUserExists(email: string): Promise<boolean> {
-    const userRef = collection(this.firestore, 'users'); // Referencia a la colección de usuarios
-    const q = query(userRef, where('mail', '==', email)); // Consulta para buscar el correo
+    const userRef = collection(this.firestore, 'users'); 
+    const q = query(userRef, where('mail', '==', email)); 
     const querySnapshot = await getDocs(q);
 
-    return !querySnapshot.empty; // Si no está vacío, el usuario ya existe
+    return !querySnapshot.empty; 
   }
 
   async Badmessage(message: string) {
@@ -150,3 +169,4 @@ export class RegisterPage implements OnInit {
     return edad + ' Años';
   }
 }
+
