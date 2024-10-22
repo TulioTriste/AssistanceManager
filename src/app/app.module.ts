@@ -18,8 +18,8 @@ import { ShowBackButtonDirective } from './show-back-button.directive'; // Impor
   ],
   imports: [
     BrowserModule,
+    AppRoutingModule,
     IonicModule.forRoot(),
-    AppRoutingModule
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },

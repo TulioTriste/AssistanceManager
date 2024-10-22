@@ -14,4 +14,15 @@
   <h1>
     {{userData?.name}}
   </h1>
+
+  <ion-button expand="block" (click)="startScan()" [disabled]="!isSupported">Start Scan</ion-button>
+
+  <ion-content>
+    <qrcode [qrdata]="'qrCodeSt'" 
+            [imageSrc]="'https://web.terapify.com/hubfs/Burnout-11.png'" 
+            [colorLight]="'#a8d3f7'" 
+            [width]='256' 
+            [errorCorrectionLevel]="'M'">
+    </qrcode>
+  </ion-content>
 </ion-content>

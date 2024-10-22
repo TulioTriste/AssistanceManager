@@ -8,12 +8,15 @@ import { AlumnoPerfilPageRoutingModule } from './alumno-perfil-routing.module';
 
 import { AlumnoPerfilPage } from './alumno-perfil.page';
 
+import { QRCodeModule } from 'angularx-qrcode';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    AlumnoPerfilPageRoutingModule
+    AlumnoPerfilPageRoutingModule,
+    QRCodeModule
   ],
   declarations: [AlumnoPerfilPage]
 })
