@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
-import { User } from 'src/app/services/user.service';
+import { User } from 'src/app/features/services/user.service';
 
 @Component({
   selector: 'app-home',

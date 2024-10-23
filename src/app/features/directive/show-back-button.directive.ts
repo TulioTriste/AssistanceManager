@@ -9,7 +9,7 @@ export class ShowBackButtonDirective implements OnInit {
   private currentUrl: string = '';
 
   constructor(
-    private el: ElementRef,
+    public el: ElementRef,
     private router: Router
   ) {}
 
