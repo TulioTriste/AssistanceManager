@@ -96,9 +96,10 @@ export class RegisterPage implements OnInit {
 
   // Función para verificar si el usuario ya existe en Firestore
   async checkIfUserExists(email: string): Promise<boolean> {
-    const userRef = collection(this.firestore, 'users'); 
-    const q = query(userRef, where('mail', '==', email)); 
-    const querySnapshot = await getDocs(q);
+    const querySnapshot = 
+      await getDocs(
+        query(
+          collection(this.firestore, 'users'), where('mail', '==', email)));
 
     return !querySnapshot.empty; 
   }
