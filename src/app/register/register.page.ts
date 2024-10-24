@@ -78,6 +78,9 @@ export class RegisterPage implements OnInit {
         } else {
           // Guardar datos en Firestore si no existe
           try {
+            this.user.age = this.calcAge();
+            this.user.category = this.getCategory();
+
             const userRef = collection(this.firestore, 'users'); // Referencia a la colección
             await addDoc(userRef, this.user); // Agregar el documento
             await this.presentToast();
@@ -148,13 +151,12 @@ export class RegisterPage implements OnInit {
     return passwordRegex.test(password);
   }
 
-  calcularEdad() {
+  calcAge() {
     const hoy = new Date();
     const nacimiento = new Date(this.user.date);
 
     // Asegurarse de que la fecha de nacimiento sea válida
     if (isNaN(nacimiento.getTime())) {
-      console.error('Fecha de nacimiento inválida');
       return "Ingrese el Año de Nacimiento";
     }
 
@@ -167,6 +169,28 @@ export class RegisterPage implements OnInit {
     }
 
     return edad + ' Años';
+  }
+
+  getCategory() {
+    let array = this.user.mail.split("@");
+    let domain = array[1];
+
+    if (array.length > 2 || array[0] === '') {
+      return "Ingrese un correo válido!";
+    }
+
+    if (domain === undefined) {
+      return "Sin Categoria!";
+    }
+
+    switch (domain) {
+      case 'profesor.duoc.cl':
+        return 'Docente';
+      case 'duocuc.cl':
+        return 'Estudiante';
+      default:
+        return 'Ingrese una categoría correcta!';
+    }
   }
 }
 

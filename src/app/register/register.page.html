@@ -45,16 +45,17 @@
           <!-- Edad -->
           <ion-item>
             <ion-label position="floating">Edad</ion-label>
-            <ion-label>{{ calcularEdad() }}</ion-label>
+            <ion-label>{{ calcAge() }}</ion-label>
           </ion-item>
 
           <!-- Ocupación -->
           <ion-item>
             <ion-label>Selecciona tu categoría</ion-label>
-            <ion-select [(ngModel)]="user.category" name="category">
+            <!-- <ion-select [(ngModel)]="user.category" name="category">
               <ion-select-option value="docente">Docente</ion-select-option>
               <ion-select-option value="estudiante">Estudiante</ion-select-option>
-            </ion-select>
+            </ion-select> -->
+            <ion-label>{{ getCategory() }}</ion-label>
           </ion-item>
 
           <!-- Correo -->
