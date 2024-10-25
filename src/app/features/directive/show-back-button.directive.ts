@@ -9,7 +9,7 @@ export class ShowBackButtonDirective implements OnInit {
   private currentUrl: string = '';
 
   constructor(
-    private el: ElementRef,
+    public el: ElementRef,
     private router: Router
   ) {}
 
@@ -27,11 +27,11 @@ export class ShowBackButtonDirective implements OnInit {
 
   private toggleVisibility() {
     // lista de paginas en las que el boton back es visible
-    const routesWithBackButton = ['/home', '/recoverpass', '/register']; // rutas donde se ve
-    if (routesWithBackButton.some(route => this.currentUrl.startsWith(route))) {
-      this.el.nativeElement.style.display = 'block';
-    } else {
+    const routesWithOutBackButton = ['folder/Inbox']; // rutas donde se ve
+    if (routesWithOutBackButton.some(route => this.currentUrl.startsWith(route))) {
       this.el.nativeElement.style.display = 'none';
+    } else {
+      this.el.nativeElement.style.display = 'block';
     }
   }
 }

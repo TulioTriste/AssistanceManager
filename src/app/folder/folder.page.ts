@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NavController } from '@ionic/angular'; // Importamos NavController
-import { UserService, User } from '../services/user.service';
+import { UserService, User } from '../features/services/user.service';
 
 @Component({
   selector: 'app-folder',

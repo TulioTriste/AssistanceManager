@@ -9,7 +9,7 @@ import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { ShowBackButtonDirective } from './show-back-button.directive'; // Importa la directiva
+import { ShowBackButtonDirective } from './features/directive/show-back-button.directive'; // Importa la directiva
 
 @NgModule({
   declarations: [
