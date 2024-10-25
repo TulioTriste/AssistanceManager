@@ -13,10 +13,13 @@ app.post('/send-email', (req, res) => {
     const { name, email, message } = req.body;
 
     const transporter = nodemailer.createTransport({
+        host: 'localhost',
+        port: port,
+        secure: false,
         service: 'gmail', // Use your email service
         auth: {
-        user: 'registrappduocsb@gmail.com', // Your email
-        pass: '@PassSec123' // Your email password
+            user: 'registrappduocsb@gmail.com', // Your email
+            pass: 'mguo oaeo wvgz rpis' // Your email password
         }
     });
 
@@ -29,7 +32,7 @@ app.post('/send-email', (req, res) => {
 
     transporter.sendMail(mailOptions, (error, info) => {
         if (error) {
-        return res.status(500).send(error.toString());
+            return res.status(500).send(error.toString());
         }
         res.status(200).send('Email sent: ' + info.response);
     });

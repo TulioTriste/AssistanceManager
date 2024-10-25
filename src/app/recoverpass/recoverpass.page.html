@@ -26,12 +26,13 @@
             type="text"
             labelPlacement="floating"
             placeholder="Ingrese su correo"
+            [(ngModel)]="email"
           ></ion-input>
         </ion-item>
       </ion-card-content>
       <!-- Contenedor adicional para el botón -->
       <div class="button-container">
-        <ion-button expand="full" color="primary" (click)="presentToast()" [routerLink]="['/folder/inbox']">Recuperar</ion-button>
+        <ion-button expand="full" color="primary" (click)="onSubmit()">Recuperar</ion-button>
       </div>
     </ion-card>
   </div>
