@@ -1,6 +1,5 @@
 import { CanActivateFn, Router } from '@angular/router';
 import { inject } from '@angular/core';
-import { NavController } from '@ionic/angular';
 import { User } from '../services/user.service';
 
 export const loginGuard: CanActivateFn = (route, state) => {
@@ -11,9 +10,7 @@ export const loginGuard: CanActivateFn = (route, state) => {
   try {
     const categoria = userData.category; // o cualquier otra forma de obtener la categoría
 
-    if (categoria === 'docente') {
-      return true;
-    } else if (categoria === 'estudiante') {
+    if (categoria === 'docente' || categoria === 'estudiante') {
       return true;
     } else {
       router.navigate(['/folder/Inbox']);

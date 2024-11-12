@@ -10,27 +10,30 @@ app.use(cors());
 app.use(bodyParser.json());
 
 app.post('/send-email', (req, res) => {
-    const { name, email, message } = req.body;
+    console.log("test3");
+    const { subject, email, message } = req.body;
 
     const transporter = nodemailer.createTransport({
         host: 'localhost',
         port: port,
         secure: false,
-        service: 'gmail', // Use your email service
+        service: 'gmail',
         auth: {
-            user: 'registrappduocsb@gmail.com', // Your email
-            pass: 'mguo oaeo wvgz rpis' // Your email password
+            user: 'registrappduocsb@gmail.com',
+            pass: 'mguo oaeo wvgz rpis'
         }
     });
 
     const mailOptions = {
         from: 'registrappduocsb@gmail.com',
-        to: email, // Send email to the user
-        subject: 'Welcome!',
-        text: 'Test Email by Sebastián Morales!'
+        to: email,
+        subject: subject,
+        text: message
     };
 
+    console.log("test2");
     transporter.sendMail(mailOptions, (error, info) => {
+        console.log("test");
         if (error) {
             return res.status(500).send(error.toString());
         }

@@ -26,10 +26,6 @@ const routes: Routes = [
     loadChildren: () => import('./register/register.module').then(m => m.RegisterPageModule)
   },
   {
-    path: 'error_page',
-    loadChildren: () => import('./errorpage/errorpage.module').then(m => m.ErrorpagePageModule) // Asegúrate de que el nombre coincida
-  },
-  {
     path: 'docente-perfil',
     loadChildren: () => import('./perfiles/docente-perfil/docente-perfil.module').then( m => m.DocentePerfilPageModule),
     canActivate: [loginGuard]
@@ -38,6 +34,10 @@ const routes: Routes = [
     path: 'alumno-perfil',
     loadChildren: () => import('./perfiles/alumno-perfil/alumno-perfil.module').then( m => m.AlumnoPerfilPageModule),
     canActivate: [loginGuard]
+  },
+  {
+    path: 'error_page',
+    loadChildren: () => import('./errorpage/errorpage.module').then(m => m.ErrorpagePageModule)
   },
   {
     path: '**',
