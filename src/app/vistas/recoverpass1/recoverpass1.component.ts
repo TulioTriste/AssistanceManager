@@ -29,9 +29,6 @@ export class Recoverpass1Component implements OnInit {
     this.emailEmitter.emit(this.email);
     this.codeEmitter.emit(this.code);
   }
-  
-  onSubmit() {
-  }
 
   generateRandomCode(): string {
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';

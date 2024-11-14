@@ -8,24 +8,20 @@ import { Component, OnInit } from '@angular/core';
 export class RecoverpassPage implements OnInit {
 
   view: boolean = true;
-  email: string = '';
-  code: string = '';
+  oldEmail: string = '';
+  createdCode: string = '';
 
   constructor() { }
 
   ngOnInit() { }
 
-  onSubmitMain() {
-    console.log(this.view);
-  }
-
   getEmailEmitted(variable: string) {
-    this.email = variable;
+    this.oldEmail = variable;
     console.log(variable); 
   }
 
   getCodeEmitted(variable: string) {
-    this.code = variable;
+    this.createdCode = variable;
     this.view = false;
     console.log(variable); 
   }

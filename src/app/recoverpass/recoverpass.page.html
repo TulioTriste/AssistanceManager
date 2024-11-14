@@ -15,8 +15,11 @@
   </ion-header>
 
   <div>
-    <app-recoverpass1 *ngIf="view" (emailEmitter)="getEmailEmitted($event)" 
+    <app-recoverpass1 *ngIf="view" 
+                      (emailEmitter)="getEmailEmitted($event)" 
                       (codeEmitter)="getCodeEmitted($event)"></app-recoverpass1>
-    <app-recoverpass2 *ngIf="!view"></app-recoverpass2>
+
+    <app-recoverpass2 *ngIf="!view" 
+                      [code]="createdCode" [email]="oldEmail"></app-recoverpass2>
   </div>
 </ion-content>
