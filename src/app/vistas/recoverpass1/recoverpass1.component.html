@@ -1,0 +1,22 @@
+<div class="content-container">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title class="card-title">Ingrese su correo</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <ion-input
+          label="Correo"
+          type="text"
+          labelPlacement="floating"
+          placeholder="Ingrese su correo"
+          [(ngModel)]="email"
+        ></ion-input>
+      </ion-item>
+    </ion-card-content>
+    <!-- Contenedor adicional para el botón -->
+    <div class="button-container">
+      <ion-button expand="full" color="primary" (click)="onClick()">Recuperar</ion-button>
+    </div>
+  </ion-card>
+</div>

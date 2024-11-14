@@ -1,7 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-//import { ToastController } from '@ionic/angular';  // Importa el ToastController
-import { EmailService } from '../features/services/email.service';
-import { response } from 'express';
 
 @Component({
   selector: 'app-recoverpass',
@@ -10,43 +7,26 @@ import { response } from 'express';
 })
 export class RecoverpassPage implements OnInit {
 
-  view: string = 'default';
-
+  view: boolean = true;
   email: string = '';
-
   code: string = '';
 
-  constructor(private emailService: EmailService/*, private toastController: ToastController*/) { }
+  constructor() { }
 
   ngOnInit() { }
 
-  onSubmit() {
-    this.code = this.generateRandomCode();
-
-    this.emailService.sendEmail(this.email, 
-      "Cambio de contraseña", 
-      "Codigo para Cambio de Contraseña\n\n" + this.code)
-      .subscribe(
-        response => {
-          console.log(response);
-        },
-        error => {
-          console.log(error);
-        }
-      );
-
-    this.view = 'code';
+  onSubmitMain() {
+    console.log(this.view);
   }
 
-  generateRandomCode(): string {
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    let code = '';
+  getEmailEmitted(variable: string) {
+    this.email = variable;
+    console.log(variable); 
+  }
 
-    for (let i = 0; i < 6; i++) {
-      const randomIndex = Math.floor(Math.random() * characters.length);
-      code += characters[randomIndex];
-    }
-
-    return code;
+  getCodeEmitted(variable: string) {
+    this.code = variable;
+    this.view = false;
+    console.log(variable); 
   }
 }

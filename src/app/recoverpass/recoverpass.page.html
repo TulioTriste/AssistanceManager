@@ -14,26 +14,9 @@
     </ion-toolbar>
   </ion-header>
 
-  <div class="content-container">
-    <ion-card>
-      <ion-card-header>
-        <ion-card-title class="card-title">Ingrese su correo</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        <ion-item>
-          <ion-input
-            label="Correo"
-            type="text"
-            labelPlacement="floating"
-            placeholder="Ingrese su correo"
-            [(ngModel)]="email"
-          ></ion-input>
-        </ion-item>
-      </ion-card-content>
-      <!-- Contenedor adicional para el botón -->
-      <div class="button-container">
-        <ion-button expand="full" color="primary" (click)="onSubmit()">Recuperar</ion-button>
-      </div>
-    </ion-card>
+  <div>
+    <app-recoverpass1 *ngIf="view" (emailEmitter)="getEmailEmitted($event)" 
+                      (codeEmitter)="getCodeEmitted($event)"></app-recoverpass1>
+    <app-recoverpass2 *ngIf="!view"></app-recoverpass2>
   </div>
 </ion-content>
