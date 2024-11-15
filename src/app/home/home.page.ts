@@ -30,12 +30,12 @@ export class HomePage implements OnInit {
   ngOnInit() {}
 
   async goPerfil() {
-    console.log(this.userData?.category);
-    if (this.userData?.category === "docente") {
+    const category = this.userData?.category.toLowerCase();
+    if (category === "docente") {
       this.navCtrl.navigateForward('/docente-perfil', {
         state: history.state,
       });
-    } else if (this.userData?.category === "estudiante") {
+    } else if (category === "estudiante") {
       this.navCtrl.navigateForward('/alumno-perfil', {
         state: history.state,
       });
