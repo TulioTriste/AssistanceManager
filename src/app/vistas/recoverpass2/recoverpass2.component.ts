@@ -21,6 +21,7 @@ export class Recoverpass2Component  implements OnInit {
   ngOnInit() {}
 
   async onClick() {
+    this.message = "";
     console.log(this.code + "   " + this.email);
     if (this.codeInput != this.code) {
       this.message = 'El codigo ingresado no es correcto';
@@ -28,22 +29,28 @@ export class Recoverpass2Component  implements OnInit {
     }
 
     // Validación de password
+    if (!this.isPasswordStrong(this.newPassword)) {
+      this.message = "La contraseña debe tener al menos 8 caracteres, incluir una mayúscula, una minúscula, un número y un carácter especial.";
+      return;
+    }
 
     const usersRef = collection(this.firestore, 'users');
     const q = query(usersRef, where('mail', '==', this.email));
     const querySnapshot = await getDocs(q);
 
-    console.log(this.email);
-
     if (!querySnapshot.empty) {
-      // Obtener el primer documento (supuesto que no haya más de un usuario con ese email)
       const userDoc = querySnapshot.docs[0];
-      const userRef = doc(this.firestore, 'users', userDoc.id); // Referencia al documento específico
-      await updateDoc(userRef, { password: this.newPassword }); // Actualizar el documento
+      const userRef = doc(this.firestore, 'users', userDoc.id);
+      await updateDoc(userRef, { password: this.newPassword });
       console.log("Password updated");
     } else {
-      throw new Error('No se encontró el usuario con ese correo');
+      this.message = "No se encontró el usuario con ese correo."
+      //throw new Error('No se encontró el usuario con ese correo');
     }
-    console.log(this.message);
+  }
+
+  isPasswordStrong(password: string): boolean {
+    const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-])[A-Za-z\d!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]{8,}$/;
+    return passwordRegex.test(password);
   }
 }
