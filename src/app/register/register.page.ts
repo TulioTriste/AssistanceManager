@@ -17,9 +17,10 @@ export class RegisterPage implements OnInit {
     date: '',
     category: '',
     password: '',
-    password2: '',
     mail: ''
   };
+
+  password2 = '';
 
   constructor(
     private router: Router,
@@ -51,11 +52,11 @@ export class RegisterPage implements OnInit {
       this.showAlert('Correo');
     } else if (!this.user.password) {
       this.showAlert('Contraseña');
-    } else if (!this.user.password2) {
+    } else if (!this.password2) {
       this.showAlert('Contraseña');
     } else if (!this.isPasswordStrong(this.user.password)) {
       this.showAlert('Contraseña no válida. Debe tener al menos 8 caracteres, incluir una mayúscula, una minúscula, un número y un carácter especial.');
-    } else if (this.user.password !== this.user.password2) {
+    } else if (this.user.password !== this.password2) {
       await this.showProblema();
     }  else if (partes.length === 2) {
       // Guarda la parte después del "@"
