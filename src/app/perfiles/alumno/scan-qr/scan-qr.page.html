@@ -1,0 +1,18 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>scan-qr</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">scan-qr</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ngx-scanner-qrcode #scanner="scanner" (data)="onQrCodeScanned($event)"></ngx-scanner-qrcode>
+  <button (click)="scanner.start()">Start Scanning</button>
+  <button (click)="scanner.stop()">Stop Scanning</button>
+  
+</ion-content>

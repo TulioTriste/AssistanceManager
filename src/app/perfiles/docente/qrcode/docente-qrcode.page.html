@@ -1,0 +1,20 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>docente-qrcode</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">docente-qrcode</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <qrcode [qrdata]="qrCodeSt" 
+            [imageSrc]="'https://web.terapify.com/hubfs/Burnout-11.png'" 
+            [colorLight]="'#a8d3f7'" 
+            [width]='256' 
+            [errorCorrectionLevel]="'M'">
+    </qrcode>
+</ion-content>

@@ -1,0 +1,35 @@
+<div>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title class="card-title">Ingrese los Datos</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <ion-input
+          label="Código de 6 dígitos"
+          type="text"
+          labelPlacement="floating"
+          placeholder="Ingrese el código"
+          [(ngModel)]="codeInput"
+        ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input
+          label="Nueva Contraseña"
+          type="password"
+          labelPlacement="floating"
+          placeholder="Ingrese la nueva contraseña"
+          [(ngModel)]="newPassword"
+        ></ion-input>
+      </ion-item>
+
+      <ion-card-content>
+        {{ message }}
+      </ion-card-content>
+    </ion-card-content>
+    <!-- Contenedor adicional para el botón -->
+    <div class="button-container">
+      <ion-button expand="full" color="secondary" (click)="onClick()">Cambiar</ion-button>
+    </div>
+  </ion-card>
+</div>

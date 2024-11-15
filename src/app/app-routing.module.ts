@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 import { loginGuard } from './features/guard/login.guard';
 
 const routes: Routes = [
@@ -14,7 +15,7 @@ const routes: Routes = [
   },
   {
     path: 'home',
-    loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
+    loadChildren: () => import('./home/home.module').then(m => m.HomePageModule),
   },
   {
     path: 'recoverpass',
@@ -25,29 +26,39 @@ const routes: Routes = [
     loadChildren: () => import('./register/register.module').then(m => m.RegisterPageModule)
   },
   {
-    path: 'error_page',
-    loadChildren: () => import('./errorpage/errorpage.module').then(m => m.ErrorpagePageModule) // Asegúrate de que el nombre coincida
-  },
-  {
     path: 'docente-perfil',
-    loadChildren: () => import('./perfiles/docente-perfil/docente-perfil.module').then( m => m.DocentePerfilPageModule),
+    loadChildren: () => import('./perfiles/docente/perfil/docente-perfil.module').then( m => m.DocentePerfilPageModule),
     canActivate: [loginGuard]
   },
   {
     path: 'alumno-perfil',
-    loadChildren: () => import('./perfiles/alumno-perfil/alumno-perfil.module').then( m => m.AlumnoPerfilPageModule),
+    loadChildren: () => import('./perfiles/alumno/perfil/alumno-perfil.module').then( m => m.AlumnoPerfilPageModule),
     canActivate: [loginGuard]
+  },
+  {
+    path: 'docente-qrcode',
+    loadChildren: () => import('./perfiles/docente/qrcode/docente-qrcode.module').then( m => m.DocenteQrcodePageModule)
+  },
+  {
+    path: 'scan-qr',
+    loadChildren: () => import('./perfiles/alumno/scan-qr/scan-qr.module').then( m => m.ScanQrPageModule)
+  },
+  {
+    path: 'error_page',
+    loadChildren: () => import('./errorpage/errorpage.module').then(m => m.ErrorpagePageModule)
   },
   {
     path: '**',
     redirectTo: 'error_page', // Redirige a la página de error
     pathMatch: 'full'
   },
+
 ];
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
+    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules }),
+    HttpClientModule,
   ],
   exports: [RouterModule]
 })

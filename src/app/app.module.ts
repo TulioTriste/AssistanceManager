@@ -10,19 +10,23 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { ShowBackButtonDirective } from './features/directive/show-back-button.directive'; // Importa la directiva
+import { EmailService } from './features/services/email.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ShowBackButtonDirective // Declara la directiva
+    ShowBackButtonDirective, // Declara la directiva
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     IonicModule.forRoot(),
+    HttpClientModule,
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    EmailService,
     provideAnimationsAsync(),
     provideFirebaseApp(() => initializeApp({ 
       // Bastian Ampuero DATABASE
