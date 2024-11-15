@@ -5,7 +5,7 @@ export interface User {
   email: string;
   name: string;
   surname: string;
-  age: string;
+  age: number;
   date: string;
   category: string;
 }
