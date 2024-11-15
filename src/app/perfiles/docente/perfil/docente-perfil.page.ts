@@ -19,4 +19,10 @@ export class DocentePerfilPage implements OnInit {
   ngOnInit() {
   }
 
+  goQrCode() {
+    this.navCtrl.navigateForward('/docente-qrcode', {
+      state: history.state,
+    });
+  }
+
 }

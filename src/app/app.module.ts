@@ -12,8 +12,6 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { ShowBackButtonDirective } from './features/directive/show-back-button.directive'; // Importa la directiva
 import { EmailService } from './features/services/email.service';
 import { HttpClientModule } from '@angular/common/http';
-import { Recoverpass1Component } from './vistas/recoverpass1/recoverpass1.component';
-import { Recoverpass2Component } from './vistas/recoverpass2/recoverpass2.component';
 
 @NgModule({
   declarations: [

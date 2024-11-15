@@ -27,13 +27,17 @@ const routes: Routes = [
   },
   {
     path: 'docente-perfil',
-    loadChildren: () => import('./perfiles/docente-perfil/docente-perfil.module').then( m => m.DocentePerfilPageModule),
+    loadChildren: () => import('./perfiles/docente/perfil/docente-perfil.module').then( m => m.DocentePerfilPageModule),
     canActivate: [loginGuard]
   },
   {
     path: 'alumno-perfil',
     loadChildren: () => import('./perfiles/alumno-perfil/alumno-perfil.module').then( m => m.AlumnoPerfilPageModule),
     canActivate: [loginGuard]
+  },
+  {
+    path: 'docente-qrcode',
+    loadChildren: () => import('./perfiles/docente/qrcode/docente-qrcode.module').then( m => m.DocenteQrcodePageModule)
   },
   {
     path: 'error_page',
