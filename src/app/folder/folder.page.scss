@@ -90,4 +90,62 @@ ion-item ion-button {
     transform: translateY(-15px);
   }
 }
+.title1{
+    text-align: center;
+    font-weight: bold;
+}
 
+/* Estilo base para los botones */
+.custom-button {
+  display: inline-block;
+  background-color: #007BFF; /* Azul predeterminado */
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  cursor: pointer;
+  width: 100%;
+  max-width: 200px;
+}
+
+/* Hover para los botones */
+.custom-button:hover {
+  background-color: #0056b3; /* Azul más oscuro */
+  transform: scale(1.05); /* Efecto de agrandamiento */
+}
+
+/* Botones con bordes claros */
+.custom-button-outline {
+  background-color: transparent;
+  color: #007BFF;
+  border: 2px solid #007BFF;
+}
+
+.custom-button-outline:hover {
+  background-color: #007BFF;
+  color: white;
+}
+
+/* Estilo para los campos de entrada */
+.custom-input {
+  --padding-start: 15px; /* Espaciado interno */
+  --padding-end: 15px;
+  --border-radius: 8px; /* Bordes redondeados */
+  --background: #f4f4f4; /* Fondo claro */
+  --border: 1px solid #ccc; /* Borde gris claro */
+  font-size: 16px; /* Tamaño de fuente */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra */
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+/* Cambia el color del borde y la sombra al hacer foco */
+.custom-input:focus {
+  --border-color: #007bff; /* Borde azul */
+  --box-shadow: 0 0 8px rgba(0, 123, 255, 0.5); /* Sombra azul */
+  outline: none;
+}

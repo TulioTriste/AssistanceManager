@@ -1,4 +1,9 @@
 <ion-header [translucent]="true">
+  <!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUa8b9g5NrWt9w6xPrj8SxK4E1wQp1xpsKxnYN7M5t+ARyD+dENv8bwAjCmB" crossorigin="anonymous">
+
+<!-- Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+bxhTAM7VdW1B8slmNXbQPLbF8Ek+" crossorigin="anonymous"></script>
   <!-- Font Awesome CDN -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <!-- Flecha para regresar a la página anterior -->
@@ -8,6 +13,7 @@
       </ion-buttons>
       <ion-title>{{ folder | titlecase }}</ion-title>
     </ion-toolbar> -->
+    <h3 class="title1">Assistance Manager</h3>
   </ion-header>
 <ion-content [fullscreen]="true">
   <ion-card>
@@ -21,23 +27,22 @@
     <ion-list>
       <ion-item>
         <ion-card-content>
-          Ingrese sus Credenciales
+          <h4>Ingrese sus credenciales</h4>
         </ion-card-content>
       </ion-item>
 
-      <!-- Campo de usuario -->
-      <ion-item>
-        <ion-input [(ngModel)]="user.email" label="Email" labelPlacement="floating" placeholder="Ingrese su email">
-        </ion-input>
-      </ion-item>
-
-      <!-- Campo de contraseña con icono para mostrar u ocultar -->
-      <ion-item>
-        <ion-input [(ngModel)]="user.password" [type]="passwordType" label="Contraseña" labelPlacement="floating"
-          placeholder="Ingrese su contraseña">
-          <ion-icon [name]="eyeIcon" slot="end" (click)="togglePasswordVisibility()"></ion-icon>
-        </ion-input>
-      </ion-item>
+     <!-- Campo de usuario -->
+<ion-item>
+  <ion-input class="custom-input" [(ngModel)]="user.email" label="Email" labelPlacement="floating" placeholder="Ingrese su email">
+  </ion-input>
+</ion-item>
+<!-- Campo de contraseña con icono para mostrar u ocultar -->
+<ion-item>
+  <ion-input class="custom-input" [(ngModel)]="user.password" [type]="passwordType" label="Contraseña" labelPlacement="floating"
+    placeholder="Ingrese su contraseña">
+    <ion-icon [name]="eyeIcon" slot="end" (click)="togglePasswordVisibility()"></ion-icon>
+  </ion-input>
+</ion-item>
 
       <!-- Mensaje de validación -->
       <ion-item>
@@ -56,17 +61,17 @@
 
       <!-- Botón de ingreso -->
       <ion-item>
-        <ion-button fill="clear" expand="block" (click)="validar()">Ingresar</ion-button>
+        <ion-button class="custom-button" fill="clear" expand="block" (click)="validar()">Ingresar</ion-button>
       </ion-item> 
 
       <!-- Botón para registrarse -->
       <ion-item>
-        <ion-button fill="clear" [routerLink]="['/register']">Registrar</ion-button>
+        <ion-button class="custom-button" fill="clear" [routerLink]="['/register']">Registrar</ion-button>
       </ion-item>
 
       <!-- Enlace para recuperar contraseña -->
       <ion-item>
-        <ion-button fill="clear" [routerLink]="['/recoverpass']">¿Olvidaste tu contraseña?</ion-button>
+        <ion-button class="custom-button" fill="clear" [routerLink]="['/recoverpass']">¿Olvidaste tu contraseña?</ion-button>
       </ion-item>
     </ion-list>
   </ion-card>

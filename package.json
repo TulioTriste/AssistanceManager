@@ -39,6 +39,7 @@
     "angularx-qrcode": "^18.0.2",
     "AssistanceManager": "file:",
     "body-parser": "^1.20.3",
+    "bootstrap": "^5.3.3",
     "cors": "^2.8.5",
     "crypto-browserify": "^3.12.1",
     "express": "^4.21.1",
