@@ -20,7 +20,6 @@ export class DocenteQrcodePage implements OnInit {
   ngOnInit() {
     const fecha = new Date().toISOString().split('T')[0]; // Formato YYYY-MM-DD
     this.qrData = `docente=${this.userData?.name} ${this.userData?.surname}&fecha=${fecha}`;
-    console.log('QR Data:', this.qrData);
   }
 
 }

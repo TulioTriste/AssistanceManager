@@ -7,8 +7,9 @@ import { IonicModule } from '@ionic/angular';
 import { ScanQrPageRoutingModule } from './scan-qr-routing.module';
 
 import { ScanQrPage } from './scan-qr.page';
-import { NgxScannerQrcodeModule } from 'ngx-scanner-qrcode';
+import { NgxScannerQrcodeModule, LOAD_WASM } from 'ngx-scanner-qrcode';
 
+LOAD_WASM().subscribe();
 @NgModule({
   imports: [
     CommonModule,

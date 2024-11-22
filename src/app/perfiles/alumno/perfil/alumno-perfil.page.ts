@@ -30,14 +30,10 @@ export class AlumnoPerfilPage implements OnInit {
     });
   }
 
-  async scan(): Promise<void> {
-    const granted = await this.requestPermissions();
-    if (!granted) {
-      this.presentAlert();
-      return;
-    }
-    const { barcodes } = await BarcodeScanner.scan();
-    this.barcodes.push(...barcodes);
+  scan() {
+    this.navCtrl.navigateForward('/scan-qr', {
+      state: history.state,
+    });
   }
 
   async requestPermissions(): Promise<boolean> {

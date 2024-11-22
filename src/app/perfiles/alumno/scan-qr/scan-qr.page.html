@@ -11,7 +11,13 @@
     </ion-toolbar>
   </ion-header>
 
-  <ngx-scanner-qrcode #action="scanner" (event)="onEvent($event, action)"></ngx-scanner-qrcode>
+  <ngx-scanner-qrcode #action="scanner" (event)="onEvent($event)"></ngx-scanner-qrcode>
+  <div *ngIf="action.isLoading">
+    <h2>Loading...</h2>
+  </div>
+  <div>
+    <h2>{{message}}</h2>
+  </div>
   <!-- <button (click)="scanner.start()">Start Scanning</button>
   <button (click)="scanner.stop()">Stop Scanning</button> -->
   
