@@ -1,4 +1,5 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { response } from 'express';
 import { EmailService } from 'src/app/features/services/email.service';
 
 @Component({
@@ -21,9 +22,19 @@ export class Recoverpass1Component implements OnInit {
 
   onClick() {
     this.code = this.generateRandomCode();
-    this.emailService.sendEmail(this.email, 
-      "Cambio de contraseña", 
-      "Codigo para Cambio de Contraseña\n\n" + this.code);
+
+    // Email Service
+    const email = this.email;
+    const name = "Cambio de contraseña";
+    const message = "Codigo para Cambio de Contraseña\n\n" + this.code;
+
+    const body = { name, email, message };
+
+    this.emailService.sendEmail(body).subscribe(response => {
+      console.log("Correo Enviado:", response);
+    }, Error => {
+      console.log("Error al enviar correo:", Error);
+    });
 
     this.changeView.emit(false); // Emitir el evento al componente padre
     this.emailEmitter.emit(this.email);

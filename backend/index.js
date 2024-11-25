@@ -10,7 +10,6 @@ app.use(cors());
 app.use(bodyParser.json());
 
 app.post('/send-email', (req, res) => {
-    console.log("test3");
     const { subject, email, message } = req.body;
 
     const transporter = nodemailer.createTransport({
@@ -31,9 +30,7 @@ app.post('/send-email', (req, res) => {
         text: message
     };
 
-    console.log("test2");
     transporter.sendMail(mailOptions, (error, info) => {
-        console.log("test");
         if (error) {
             return res.status(500).send(error.toString());
         }
