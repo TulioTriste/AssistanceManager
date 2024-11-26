@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Firestore, collection , query, where, getDocs, updateDoc, doc} from '@angular/fire/firestore';
+import { NavController, ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-recoverpass2',
@@ -16,13 +17,14 @@ export class Recoverpass2Component  implements OnInit {
   codeInput: string = '';
   newPassword: string = '';
 
-  constructor(private firestore: Firestore) { }
+  constructor(private firestore: Firestore,
+    private toastController: ToastController, 
+    private navCtrl: NavController) { }
 
   ngOnInit() {}
 
   async onClick() {
     this.message = "";
-    console.log(this.code + "   " + this.email);
     if (this.codeInput != this.code) {
       this.message = 'El codigo ingresado no es correcto';
       return;
@@ -38,19 +40,29 @@ export class Recoverpass2Component  implements OnInit {
     const q = query(usersRef, where('mail', '==', this.email));
     const querySnapshot = await getDocs(q);
 
-    if (!querySnapshot.empty) {
-      const userDoc = querySnapshot.docs[0];
-      const userRef = doc(this.firestore, 'users', userDoc.id);
-      await updateDoc(userRef, { password: this.newPassword });
-      console.log("Password updated");
-    } else {
-      this.message = "No se encontró el usuario con ese correo."
-      //throw new Error('No se encontró el usuario con ese correo');
-    }
+    const userDoc = querySnapshot.docs[0];
+    const userRef = doc(this.firestore, 'users', userDoc.id);
+    await updateDoc(userRef, { password: this.newPassword });
+    await this.presentSuccessToast();
+    setTimeout(() => {
+      this.navCtrl.navigateForward('/folder/Inbox');
+    }, 3000);
+    console.log("Password updated");
   }
 
   isPasswordStrong(password: string): boolean {
     const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-])[A-Za-z\d!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]{8,}$/;
     return passwordRegex.test(password);
   }
+
+  async presentSuccessToast() {
+    const toast = await this.toastController.create({
+      message: 'Se ha actualizado la contraseña exitosamente!',
+      duration: 3000,
+      position: 'top',
+      color: 'success',
+    });
+    toast.present();
+  }
+
 }
