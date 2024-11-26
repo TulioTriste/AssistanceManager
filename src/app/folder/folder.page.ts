@@ -41,6 +41,9 @@ export class FolderPage implements OnInit {
           let navigationExtras: any = {
             state: this.userData
           };
+
+          history.replaceState(this.userData, ''); // Así al volver a loguear no se queda la info anterior
+          
           this.mensaje = 'Conexión exitosa';
 
           this.cambiarSpinner();

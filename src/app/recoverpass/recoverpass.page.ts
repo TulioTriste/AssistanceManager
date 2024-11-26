@@ -23,6 +23,6 @@ export class RecoverpassPage implements OnInit {
   getCodeEmitted(variable: string) {
     this.createdCode = variable;
     this.view = false;
-    console.log(variable); 
+    console.log(variable);
   }
 }
