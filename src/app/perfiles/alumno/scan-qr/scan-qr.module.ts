@@ -7,16 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { ScanQrPageRoutingModule } from './scan-qr-routing.module';
 
 import { ScanQrPage } from './scan-qr.page';
-import { NgxScannerQrcodeModule, LOAD_WASM } from 'ngx-scanner-qrcode';
+import { ZXingScannerModule } from '@zxing/ngx-scanner';
 
-LOAD_WASM().subscribe();
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
     ScanQrPageRoutingModule,
-    NgxScannerQrcodeModule
+    ZXingScannerModule
   ],
   declarations: [ScanQrPage]
 })

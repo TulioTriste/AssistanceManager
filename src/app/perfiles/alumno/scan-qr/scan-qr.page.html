@@ -11,14 +11,20 @@
     </ion-toolbar>
   </ion-header>
 
-  <ngx-scanner-qrcode #action="scanner" (event)="onEvent($event)"></ngx-scanner-qrcode>
-  <div *ngIf="action.isLoading">
-    <h2>Loading...</h2>
+  <div class="qr-scan-area">
+    <zxing-scanner 
+      (scanSuccess)="onCodeResult($event)" 
+      (permissionResponse)="hasPermission = $event">
+    </zxing-scanner>
+  
+    <div *ngIf="qrResult">
+      <h3>Resultado del Escaneo:</h3>
+      <p>{{ qrResult }}</p>
+    </div>
+  
+    <div *ngIf="!hasPermission">
+      <p>Por favor, permite el acceso a la cámara.</p>
+    </div>
   </div>
-  <div>
-    <h2>{{message}}</h2>
-  </div>
-  <!-- <button (click)="scanner.start()">Start Scanning</button>
-  <button (click)="scanner.stop()">Stop Scanning</button> -->
   
 </ion-content>
