@@ -45,7 +45,7 @@ export class Recoverpass2Component  implements OnInit {
     await updateDoc(userRef, { password: this.newPassword });
     await this.presentSuccessToast();
     setTimeout(() => {
-      this.navCtrl.navigateForward('/login');
+      this.navCtrl.navigateForward('/folder/Inbox');
     }, 3000);
     console.log("Password updated");
   }
