@@ -3,7 +3,7 @@ import type { CapacitorConfig } from '@capacitor/cli';
 const config: CapacitorConfig = {
   appId: 'com.example.app',
   appName: 'AssistanceManager',
-  webDir: 'www',
+  webDir: 'src',
   cordova: {
     preferences: {
       ScrollEnabled: 'false',

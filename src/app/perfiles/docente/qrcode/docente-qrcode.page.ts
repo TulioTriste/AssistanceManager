@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { NavController } from '@ionic/angular';
 import { User } from 'src/app/features/services/user.service';
+import { Firestore, collection, addDoc } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-docente-qrcode',
@@ -13,13 +12,25 @@ export class DocenteQrcodePage implements OnInit {
   public userData: User | undefined;
   qrData: string = '';
 
-  constructor(private router: Router, private navCtrl: NavController) {
+  constructor(private firestore: Firestore) {
     this.userData = history.state as User;
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     const fecha = new Date().toISOString().split('T')[0]; // Formato YYYY-MM-DD
-    this.qrData = `docente=${this.userData?.name} ${this.userData?.surname}&fecha=${fecha}`;
+
+    const assisRef = collection(this.firestore, 'asistencia'); // Referencia a la colección
+
+    const doc = await addDoc(assisRef, {
+      docente: this.userData?.name, 
+      fecha: fecha, 
+      asignatura: 'Programación Movil',
+      available: true,
+      presentes: [],
+    }); // Agregar el documento
+
+    console.log('Document written with ID: ', doc.id);
+    this.qrData = doc.id;
   }
 
 }

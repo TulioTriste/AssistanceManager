@@ -12,7 +12,7 @@
   </ion-header>
 
   <div class="qr-scan-area">
-    <zxing-scanner 
+    <zxing-scanner *ngIf="!hasResult"
       (scanSuccess)="onCodeResult($event)" 
       (permissionResponse)="hasPermission = $event">
     </zxing-scanner>
@@ -24,6 +24,10 @@
   
     <div *ngIf="!hasPermission">
       <p>Por favor, permite el acceso a la cámara.</p>
+    </div>
+
+    <div>
+      <p>{{ message }}</p>
     </div>
   </div>
   
