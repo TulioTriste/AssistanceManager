@@ -3,7 +3,7 @@ import { User } from 'src/app/features/services/user.service';
 import { Firestore, doc, getDoc, updateDoc } from '@angular/fire/firestore';
 import { Dialog } from '@capacitor/dialog';
 
-interface Asistencia {
+export interface Asistencia {
   docente: string;
   fecha: string;
   asignatura: string;
@@ -47,20 +47,17 @@ export class ScanQrPage implements OnInit {
           if (!data.presentes.includes(userName)) {
             data.presentes.push(userName);
 
-            // Update only the 'presentes' field in the document
             await updateDoc(docRef, {
               presentes: data.presentes
             });
 
             this.message = '¡Asistencia registrada!';
           } else {
-            // Ya registrado || Asistencia aun abierta
             this.message = 'Ya has sido registrado';
           }
 
           this.hasResult = true;
         } else {
-          // Asistencia cerrada
           this.message = 'La asistencia ya ha sido cerrada';
         }
       } else {
