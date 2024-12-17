@@ -6,6 +6,7 @@ import { EmailService } from 'src/app/features/services/email.service';
 import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import { Asistencia } from 'src/app/perfiles/alumno/scan-qr/scan-qr.page';
 import { NavController } from '@ionic/angular';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-docente-qrcode',
@@ -23,7 +24,8 @@ export class DocenteQrcodePage implements OnInit {
 
   message = '';
 
-  constructor(private firestore: Firestore, 
+  constructor(private firestore: Firestore,
+              private toastController: ToastController,
               private emailService: EmailService,
               private navCtrl: NavController) {
     this.userData = history.state as User;
@@ -35,8 +37,8 @@ export class DocenteQrcodePage implements OnInit {
     const assisRef = collection(this.firestore, 'asistencia'); // Referencia a la colección
 
     const doc = await addDoc(assisRef, {
-      docente: this.userData?.name + ' ' + this.userData?.surname, 
-      fecha: fecha, 
+      docente: this.userData?.name + ' ' + this.userData?.surname,
+      fecha: fecha,
       asignatura: 'Programación Movil',
       available: true,
       presentes: [],
@@ -58,13 +60,13 @@ export class DocenteQrcodePage implements OnInit {
       } else {
         this.timerSubscription?.unsubscribe();
         this.timeMessage = 'Finalizado';
-        
+
         this.onFinish();
       }
     });
   }
 
-  async onFinish() {
+  async onFinish1() {
     //const email = "seb.moralesf@duocuc.cl";
     const email = this.userData?.email;
     const subject = "Asistencia registrada!";
@@ -80,13 +82,13 @@ export class DocenteQrcodePage implements OnInit {
         updateDoc(docRef, {
           available: false
         });
-        
+
         message = "Ésta es la información de la asistencía registrada: \n\n" +
                     "Docente: " + data.docente + "\n" +
                     "Fecha: " + data.fecha + "\n" +
                     "Asignatura: " + data.asignatura + "\n" +
                     "ID de asistencia: " + this.qrData + "\n" +
-                    "Alumnos Presentes:\n" + 
+                    "Alumnos Presentes:\n" +
                     data.presentes.join(', ') + "\n\n" +
                     "Gracias por usar nuestra aplicación!"
       } else {
@@ -126,4 +128,28 @@ export class DocenteQrcodePage implements OnInit {
 
     return parts.join(' ');
   }
+
+  async presentToast(message: string) {
+    const toast = await this.toastController.create({
+      message: message,
+      
+      duration: 2000, // Duración en milisegundos
+      position: 'top', // Posición del toast (puede ser 'top', 'bottom', 'middle')
+      color: 'success' // Puedes cambiar el color según tus necesidades
+    });
+    await toast.present();
+  }
+  async onFinish() {
+    // ... tu código existente ...
+
+    // this.message = 'Asistencia registrada!, redirigiendo a tu perfil...';
+
+    // Mostrar el toast
+    await this.presentToast('Asistencia registrada, redirigiendo a tu perfil...');
+
+    interval(2000).subscribe(() => {
+      this.navCtrl.navigateForward('/docente-perfil');
+    });
+  }
+  
 }

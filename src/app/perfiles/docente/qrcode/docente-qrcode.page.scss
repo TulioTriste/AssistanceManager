@@ -41,4 +41,17 @@ ion-content {
     text-align: center;
     color: #333;
   }
-  
+  .countdown-timer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem; /* Tamaño de fuente grande */
+    font-weight: bold; /* Negrita */
+    color: #ff0000; /* Color rojo para el contador */
+    background-color: rgba(255, 255, 255, 0.8); /* Fondo blanco semi-transparente */
+    border: 2px solid #ff0000; /* Borde rojo */
+    border-radius: 10px; /* Bordes redondeados */
+    padding: 20px; /* Espaciado interno */
+    margin: 20px; /* Margen alrededor del contador */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para dar efecto de profundidad */
+  }

@@ -14,8 +14,6 @@
     </ion-toolbar>
   </ion-header>
 
-  <p>Tiempo: {{ timeMessage }}</p>
-
   <qrcode [qrdata]="qrData" 
           [imageSrc]="'https://web.terapify.com/hubfs/Burnout-11.png'" 
           [colorLight]="'#a8d3f7'" 
@@ -23,7 +21,11 @@
           [errorCorrectionLevel]="'M'">
   </qrcode>
 
-  <button (click)="onFinish()">Terminar proceso de Asistencia</button>
+  <ion-button expand="full" color="danger" (click)="onFinish()">
+    Terminar asistencia
+  </ion-button>
 
   <p>{{ message }}</p>
 </ion-content>
+
+<p>Tiempo: {{ timeMessage }}</p>
