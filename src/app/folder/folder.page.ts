@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { NavController } from '@ionic/angular'; // Importamos NavController
+import { NavController } from '@ionic/angular';
 import { UserService, User } from '../features/services/user.service';
 
 @Component({
@@ -9,6 +9,7 @@ import { UserService, User } from '../features/services/user.service';
   styleUrls: ['./folder.page.scss'],
 })
 export class FolderPage implements OnInit {
+
   public folder!: string;
   private activatedRoute = inject(ActivatedRoute);
 
@@ -22,7 +23,7 @@ export class FolderPage implements OnInit {
   }
 
   public userData: User | undefined;
-  public user = {
+  public user = { // Index Data
     email: '',
     password: '',
   };
@@ -69,38 +70,6 @@ export class FolderPage implements OnInit {
     }
   }
 
-  async login(email: string, password: string): Promise<Boolean> {
-    this.userData = await this.userService.getUser(email, password);
-    if (this.userData != null) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-  
-  // // Función para verificar si el usuario ya existe en Firestore
-  // async checkIfUserExists(email: string, password: string): Promise<boolean> {
-  //   const userRef = collection(this.firestore, 'users'); // Referencia a la colección de usuarios
-  //   const q = query(
-  //     userRef, 
-  //     where('mail', '==', email),
-  //     where('password', '==', password)); // Consulta para buscar el correo
-  //   const querySnapshot = await getDocs(q);
-
-  //   return !querySnapshot.empty; // Si no está vacío, el usuario ya existe
-  // }
-
-  // // Función de la data del usuario cargada
-  // async getUserData(email: string, password: string): Promise<QuerySnapshot<DocumentData, DocumentData>> {
-  //   const userRef = collection(this.firestore, 'users'); // Referencia a la colección de usuarios
-  //   const q = query(
-  //     userRef, 
-  //     where('mail', '==', email),
-  //     where('password', '==', password)); // Consulta para buscar el correo
-
-  //   return await getDocs(q); // Si no está vacío, el usuario
-  // }
-
   togglePasswordVisibility() {
     if (this.passwordType === 'password') {
       this.passwordType = 'text';
@@ -111,14 +80,16 @@ export class FolderPage implements OnInit {
     }
   }
 
+  async login(email: string, password: string): Promise<Boolean> {
+    this.userData = await this.userService.getUser(email, password);
+    if (this.userData != null) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   cambiarSpinner() {
     this.spinner = !this.spinner;
   }
-
-  // ejecutarSwitch() {
-  //   switch (this.user.category) {
-  //     case "Docente":
-  //       return 
-  //   }
-  // }
 }

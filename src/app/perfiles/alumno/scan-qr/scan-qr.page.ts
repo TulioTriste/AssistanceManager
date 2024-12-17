@@ -1,7 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
 import { User } from 'src/app/features/services/user.service';
-import { Firestore, collection, addDoc } from '@angular/fire/firestore';
+import { Firestore, doc, getDoc, updateDoc } from '@angular/fire/firestore';
+import { Dialog } from '@capacitor/dialog';
+
+export interface Asistencia {
+  docente: string;
+  fecha: string;
+  asignatura: string;
+  available: boolean;
+  presentes: string[];
+}
 
 @Component({
   selector: 'app-scan-qr',
@@ -15,6 +23,7 @@ export class ScanQrPage implements OnInit {
 
   hasDevices: boolean = false;
   hasPermission: boolean = false;
+  hasResult: boolean = false;
   qrResult: string = '';
 
   constructor(private firestore: Firestore) {
@@ -24,28 +33,46 @@ export class ScanQrPage implements OnInit {
   ngOnInit() {
   }
 
-  onCodeResult(resultString: string): void {
-    console.log('Result: ', resultString);
+  async onCodeResult(resultString: string) {
+    const qrId = resultString;
+
+    const docRef = doc(this.firestore, 'asistencia', qrId);
+    try {
+      const querySnapshot = await getDoc(docRef);
+      if (querySnapshot.exists()) {
+        let data = querySnapshot.data() as Asistencia;
+        const userName = this.userData?.name || '';
+
+        if (data.available) {
+          if (!data.presentes.includes(userName)) {
+            data.presentes.push(userName);
+
+            await updateDoc(docRef, {
+              presentes: data.presentes
+            });
+
+            this.message = '¡Asistencia registrada!';
+          } else {
+            this.message = 'Ya has sido registrado';
+          }
+
+          this.hasResult = true;
+        } else {
+          this.message = 'La asistencia ya ha sido cerrada';
+        }
+      } else {
+        console.log('No such document!');
+      }
+    } catch (error) {
+      console.error('Error getting documents: ', error);
+    }
   }
 
-  // async onEvent(e: ScannerQRCodeResult[], action?: any) {
-  //   // e && action && action.pause();
-  //   console.log('QR Code scanned:', e);
-  //   const params = new URLSearchParams(e.toString());
-  //   const docente = params.get('docente');
-  //   const fecha = params.get('fecha');
-
-  //   const doc = {
-  //     docente: docente,
-  //     fecha: fecha,
-  //     asignatura: "Programación Movil",
-  //   }
-
-  //   const userRef = collection(this.firestore, 'asistencia'); // Referencia a la colección
-  //   await addDoc(userRef, doc); // Agregar el documento
-  //   this.message = 'DOcumento cargado correctamente';
-
-  //   //this.presentToast();
-  // }
+  async presentAlert(): Promise<void> {
+    await Dialog.alert({
+      title: 'Permission denied',
+      message: 'Please grant camera permission to use the barcode scanner.',
+    });
+  }
 
 }

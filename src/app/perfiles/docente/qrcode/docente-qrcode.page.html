@@ -14,10 +14,16 @@
     </ion-toolbar>
   </ion-header>
 
+  <p>Tiempo: {{ timeMessage }}</p>
+
   <qrcode [qrdata]="qrData" 
           [imageSrc]="'https://web.terapify.com/hubfs/Burnout-11.png'" 
           [colorLight]="'#a8d3f7'" 
           [width]='256' 
           [errorCorrectionLevel]="'M'">
   </qrcode>
+
+  <button (click)="onFinish()">Terminar proceso de Asistencia</button>
+
+  <p>{{ message }}</p>
 </ion-content>
