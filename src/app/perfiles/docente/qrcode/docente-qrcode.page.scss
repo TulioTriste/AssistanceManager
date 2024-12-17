@@ -1,0 +1,57 @@
+ion-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%; /* Asegura que el contenido ocupe toda la altura */
+    background-color: #f4f6f9; /* Fondo suave para el contenido */
+  }
+  
+  qrcode {
+    display: block;
+    margin: 20px auto; /* Márgenes para que no toque los bordes */
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave alrededor */
+    background-color: #ffffff; /* Fondo blanco para el QR */
+    padding: 10px; /* Relleno alrededor del QR */
+    width: 256px; /* Definir el tamaño fijo del QR */
+    height: 256px; /* Definir el tamaño fijo del QR */
+  }
+  
+  ion-header {
+    background-color: #3f72af; /* Fondo azul oscuro para el header */
+    color: white; /* Color del texto blanco */
+  }
+  
+  ion-toolbar {
+    --background: #3f72af; /* Fondo azul para el toolbar */
+  }
+  
+  ion-title {
+    font-size: 1.5rem; /* Tamaño de la fuente en el título */
+    font-weight: bold; /* Negrita para el título */
+  }
+  
+  ion-header[collapse="condense"] {
+    background-color: #1a2b46; /* Fondo más oscuro para la segunda cabecera */
+  }
+  
+  h2 {
+    font-size: 1.25rem;
+    font-weight: normal;
+    text-align: center;
+    color: #333;
+  }
+  .countdown-timer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem; /* Tamaño de fuente grande */
+    font-weight: bold; /* Negrita */
+    color: #ff0000; /* Color rojo para el contador */
+    background-color: rgba(255, 255, 255, 0.8); /* Fondo blanco semi-transparente */
+    border: 2px solid #ff0000; /* Borde rojo */
+    border-radius: 10px; /* Bordes redondeados */
+    padding: 20px; /* Espaciado interno */
+    margin: 20px; /* Margen alrededor del contador */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para dar efecto de profundidad */
+  }

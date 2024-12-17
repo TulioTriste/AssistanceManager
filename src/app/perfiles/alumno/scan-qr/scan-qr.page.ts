@@ -26,7 +26,7 @@ export class ScanQrPage implements OnInit {
   hasResult: boolean = false;
   qrResult: string = '';
 
-  constructor(private firestore: Firestore) {
+ constructor(private firestore: Firestore) {
     this.userData = history.state as User;
   }
 
@@ -52,13 +52,16 @@ export class ScanQrPage implements OnInit {
             });
 
             this.message = '¡Asistencia registrada!';
+            await this.showSuccessAlert(); // Call success alert
           } else {
             this.message = 'Ya has sido registrado';
+            await this.showAlreadyRegisteredAlert(); // Call already registered alert
           }
 
           this.hasResult = true;
         } else {
           this.message = 'La asistencia ya ha sido cerrada';
+          await this.showClosedAlert(); // Call closed alert
         }
       } else {
         console.log('No such document!');
@@ -75,4 +78,24 @@ export class ScanQrPage implements OnInit {
     });
   }
 
+  async showSuccessAlert(): Promise<void> {
+    await Dialog.alert({
+      title: 'Registro de Asistencia',
+      message: '¡Asistencia registrada correctamente!',
+    });
+  }
+
+  async showAlreadyRegisteredAlert(): Promise<void> {
+    await Dialog.alert({
+      title: 'Registro de Asistencia',
+      message: 'Ya has sido registrado en la asistencia.',
+    });
+  }
+
+  async showClosedAlert(): Promise<void> {
+    await Dialog.alert({
+      title: 'Registro de Asistencia',
+      message: 'La asistencia ya ha sido cerrada.',
+    });
+  }
 }
